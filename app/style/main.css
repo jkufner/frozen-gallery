@@ -7,7 +7,7 @@ html {
 }
 
 body {
-	width: 840px;
+	width: 820px;
 	margin: 0px auto;
 	padding: 20px;
 	text-align: left;
@@ -16,21 +16,67 @@ body {
 }
 
 a {
-	color: #aaf;
+	color: #7ae;
 }
 
 a:focus, a:hover {
 	color: #ccf;
+	text-shadow: 0px 0px 1em #7ae;
 }
 
 p, table, pre {
 	margin: 1em 0px;
 }
 
-h1 {
+h1, h1 a, h1 a:hover, h1 a:focus {
 	text-align: center;
-	font-size: 32px;
+	font-size: 40px;
 	font-weight: normal;
-	padding: 20px 0px;
-	border-bottom: 1px solid #aaa;
+	padding: 1em 0px;
+	border-bottom: 1px solid #888;
+	text-decoration: none;
+	color: #7ae !important;
+	text-shadow: -1px -1px 0px #000 !important;
 }
+
+table td,
+table th {
+	padding: 0.3ex 1ex;
+	border-collapse: collapse;
+	border: none;
+}
+
+	table td a {
+		display: block;
+	}
+
+.version_info {
+	margin: 5em 0em 4em 0em;
+	padding: 1ex 0em;
+	border-top: 1px solid #888;
+	text-align: center;
+}
+
+	.version_info a {
+		color: #666;
+		text-decoration: none;
+	}
+		.version_info a:hover,
+		.version_info a:focus {
+			text-decoration: underline;
+		}
+
+
+.pipeline_dump {
+	margin: -20px;
+	padding: 5em 0px;
+	background: #000;
+	text-align: center;
+}
+	.pipeline_dump hr {
+		display: none;
+	}
+	.pipeline_dump img {
+		margin: 1em 0px;
+	}
+

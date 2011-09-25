@@ -11,6 +11,7 @@ done[]		= "index:done"
 .module		= "core/out/header"
 text[]		= "router:title"
 level		= 1
+link		= "/"
 
 [module:index]
 .module		= "gallery/index/load"
