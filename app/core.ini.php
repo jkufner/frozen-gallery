@@ -87,6 +87,13 @@ title[]		= page:content_0_title
 title-fallback[] = router:title
 format[]	= router:title_fmt
 
+[module:page_hd]
+.module		= "core/out/header"
+text[]		= "page_title:title"
+level		= 1
+link		= "/"
+enable[]	= "skeleton:done"
+
 [module:page_error]
 .module		= core/out/message
 .force-exec	= true

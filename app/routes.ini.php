@@ -19,10 +19,10 @@ content = "page/version"
 title = "Version"
 
 [/$gallery]
-content = "page/show-gallery"
+content = "page/gallery"
 
 [/$gallery/$photo]
-content = "page/show-photo"
+content = "page/photo"
 
 ; vim:filetype=dosini:
 

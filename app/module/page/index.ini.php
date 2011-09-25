@@ -7,12 +7,6 @@
 done[]		= "index:done"
 
 
-[module:hd]
-.module		= "core/out/header"
-text[]		= "router:title"
-level		= 1
-link		= "/"
-
 [module:index]
 .module		= "gallery/index/load"
 
