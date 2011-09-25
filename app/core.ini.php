@@ -63,6 +63,7 @@ config		= app/routes.ini.php
 
 [module:skeleton]
 .module		= core/out/page
+css_link	= "/app/style/main.css"
 
 [module:version]
 .module		= "core/devel/version"
