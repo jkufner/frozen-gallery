@@ -64,6 +64,7 @@ config		= app/routes.ini.php
 [module:skeleton]
 .module		= core/out/page
 css_link	= "/app/style/main.css"
+enable[]	= "router:skeleton"
 
 [module:version]
 .module		= "core/devel/version"
@@ -93,6 +94,8 @@ text[]		= "page_title:title"
 level		= 1
 link		= "/"
 enable[]	= "skeleton:done"
+slot		= "default"
+slot-weight	= 10
 
 [module:page_error]
 .module		= core/out/message

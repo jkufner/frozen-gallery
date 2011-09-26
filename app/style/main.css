@@ -55,6 +55,17 @@ table th {
 		display: block;
 	}
 
+ul, ol {
+
+}
+ul li, ol li {
+	margin-top: 0.6ex;
+	margin-bottom: 0.6ex;
+}
+ul, ul li {
+	list-style: square;
+}
+
 .gallery_listing {
 	overflow: hidden;
 	clear: both;
@@ -73,10 +84,26 @@ table th {
 		text-align: center;
 		text-decoration: none;
 	}
-		.gallery_listing .item img {
-			width: 120px;
+		.gallery_listing .item:hover,
+		.gallery_listing .item:focus {
+			border-color: #ccc;
 		}
-		.gallery_listing .item span {
+		.gallery_listing .item .photo,
+		.gallery_listing .item .name {
+			display: block;
+			text-align: center;
+			margin: auto;
+			vertical-align: center;
+		}
+		.gallery_listing .item .photo {
+			width: 120px;
+			height: 120px;
+			line-height: 120px;
+		}
+			.gallery_listing .item .photo img {
+				vertical-align: middle;
+			}
+		.gallery_listing .item .name {
 		}
 
 .version_info {

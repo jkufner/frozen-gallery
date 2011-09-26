@@ -8,6 +8,7 @@
 [#]
 title = "Gallery"
 title_fmt = "%s - gallery.frozen-doe.net" 
+skeleton = true
 
 [/]
 content = "page/index"
@@ -22,7 +23,16 @@ title = "Version"
 content = "page/gallery"
 
 [/$gallery/$photo]
-content = "page/photo"
+content = "page/gallery"
+
+[/thumbnail/**]
+content = "page/thumbnail"
+size = 120
+
+[/preview/**]
+content = "page/thumbnail"
+size = 800
+
 
 ; vim:filetype=dosini:
 
