@@ -19,6 +19,10 @@ title_fmt = "%s"
 content = "page/version"
 title = "Version"
 
+[/profiler]
+content = "page/profiler"
+title = "Profiler Statistics"
+
 [/$gallery]
 content = "page/gallery"
 
@@ -28,10 +32,12 @@ content = "page/gallery"
 [/thumbnail/**]
 content = "page/thumbnail"
 size = 120
+skeleton = false
 
 [/preview/**]
 content = "page/thumbnail"
 size = 800
+skeleton = false
 
 
 ; vim:filetype=dosini:

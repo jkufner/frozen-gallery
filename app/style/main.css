@@ -97,13 +97,13 @@ ul, ul li {
 		}
 		.gallery_listing .item .photo {
 			width: 120px;
-			height: 120px;
 			line-height: 120px;
 		}
 			.gallery_listing .item .photo img {
 				vertical-align: middle;
 			}
 		.gallery_listing .item .name {
+			padding: 2px 0px 0px 0px;
 		}
 
 .version_info {
