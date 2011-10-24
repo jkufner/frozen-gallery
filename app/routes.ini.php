@@ -23,12 +23,6 @@ title = "Version"
 content = "page/profiler"
 title = "Profiler Statistics"
 
-[/$gallery]
-content = "page/gallery"
-
-[/$gallery/$photo]
-content = "page/gallery"
-
 [/thumbnail/**]
 content = "page/thumbnail"
 size = 120
@@ -39,6 +33,11 @@ content = "page/thumbnail"
 size = 800
 skeleton = false
 
+[/$gallery]
+content = "page/gallery"
+
+[/$gallery/**]
+content = "page/gallery"
 
 ; vim:filetype=dosini:
 

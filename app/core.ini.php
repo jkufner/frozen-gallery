@@ -78,7 +78,7 @@ enable[]	= "skeleton:done"
 .module		= "core/value/pipeline_loader"
 output-forward	= "done,title"
 content[]	= "router:content"
-extra[]		= "router:extra"
+;extra[]	= "router:extra"
 enable[]	= "router:done"
 
 [module:page_title]

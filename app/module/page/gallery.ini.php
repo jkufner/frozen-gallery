@@ -11,6 +11,7 @@ done[]		= "gallery:done"
 [module:gallery]
 .module		= "gallery/gallery/load"
 directory[]	= "router:gallery"
+subdirectory[]	= "router:path_tail"
 
 [module:show]
 .module		= "gallery/gallery/show"
