@@ -8,20 +8,20 @@ title[]		= "gallery:title"
 done[]		= "gallery:done"
 
 
-[module:gallery]
-.module		= "gallery/gallery/load"
+[block:gallery]
+.block		= "gallery/gallery/load"
 directory[]	= "router:gallery"
 subdirectory[]	= "router:path_tail"
 
-[module:show]
-.module		= "gallery/gallery/show"
+[block:show]
+.block		= "gallery/gallery/show"
 list[]		= "gallery:list"
-slot-weight	= 40
+slot_weight	= 40
 
-[module:others]
-.module		= "core/out/menu"
+[block:others]
+.block		= "core/out/menu"
 items[]		= "gallery:others"
-slot-weight	= 30
+slot_weight	= 30
 
 ; vim:filetype=dosini:
 

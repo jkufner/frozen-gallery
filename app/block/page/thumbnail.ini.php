@@ -8,13 +8,13 @@ title		= false
 done[]		= "create:done"
 
 
-[module:create]
-.module		= "gallery/photo/thumbnail"
+[block:create]
+.block		= "gallery/photo/thumbnail"
 size[]		= "router:size"
 filename[]	= "router:path_tail"
 
-[module:show]
-.module		= "gallery/photo/show"
+[block:show]
+.block		= "gallery/photo/show"
 image[]		= "create:thumbnail"
 enable[]	= "create:done"
 

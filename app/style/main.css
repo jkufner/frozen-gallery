@@ -1,3 +1,4 @@
+@import url(/core/style/basic.css);
 
 html {
 	color: #fff;
@@ -46,11 +47,17 @@ h1, h1 a, h1 a:hover, h1 a:focus {
 	text-shadow: -1px -1px 0px #000 !important;
 }
 
-table td,
-table th {
-	padding: 0.3ex 1ex;
-	border-collapse: collapse;
+table.table {
 	border: none;
+	background: transparent;
+	border-collapse: collapse;
+}
+
+table.table td,
+table.table th {
+	padding: 0.3ex 1ex;
+	border: none;
+	background: transparent;
 }
 
 	table td a {
@@ -126,16 +133,16 @@ ul, ul li {
 		}
 
 
-.pipeline_dump {
+.cascade_iframe {
 	margin: -20px;
 	padding: 5em 0px;
 	background: #000;
 	text-align: center;
 }
-	.pipeline_dump hr {
+	.cascade_iframe hr {
 		display: none;
 	}
-	.pipeline_dump img {
+	.cascade_iframe img {
 		margin: 1em 0px;
 	}
 

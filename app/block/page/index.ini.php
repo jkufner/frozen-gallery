@@ -7,11 +7,11 @@
 done[]		= "index:done"
 
 
-[module:index]
-.module		= "gallery/index/load"
+[block:index]
+.block		= "gallery/index/load"
 
-[module:show]
-.module		= "gallery/index/show"
+[block:show]
+.block		= "gallery/index/show"
 list[]		= "index:list"
 
 ; vim:filetype=dosini:
