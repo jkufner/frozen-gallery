@@ -1,0 +1,163 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "9b0c656434a5a622a1f81126ad9d23b8",
+    "packages": [
+        {
+            "name": "cascade/admin",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "ssh://git@akvarko.frozen-doe.net/cascade/plugin/admin.git",
+                "reference": "8e43bf05abe0040b9aa190b087fb21ed2e0c5c53"
+            },
+            "require": {
+                "cascade/composer-plugin": ">=1.1"
+            },
+            "type": "cascade-plugin",
+            "extra": {
+                "plugin": "admin"
+            },
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Josef Kufner",
+                    "email": "jk@frozen-doe.net"
+                }
+            ],
+            "description": "Administration infrastructure",
+            "time": "2014-01-22 14:06:25"
+        },
+        {
+            "name": "cascade/block_editor",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "ssh://git@akvarko.frozen-doe.net/cascade/plugin/block_editor.git",
+                "reference": "e672d0b2849fddbc36b517abb568709fd9997fc2"
+            },
+            "require": {
+                "cascade/admin": "dev-master",
+                "cascade/composer-plugin": ">=1.1"
+            },
+            "type": "cascade-plugin",
+            "extra": {
+                "plugin": "block_editor"
+            },
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Josef Kufner",
+                    "email": "jk@frozen-doe.net"
+                }
+            ],
+            "description": "Visual block editor",
+            "time": "2014-01-29 23:27:35"
+        },
+        {
+            "name": "cascade/composer-plugin",
+            "version": "v1.1",
+            "source": {
+                "type": "git",
+                "url": "ssh://git@akvarko.frozen-doe.net/cascade/composer-plugin.git",
+                "reference": "cbad9e45ab2fde398e2a741d594acd90c54b8f2b"
+            },
+            "type": "composer-installer",
+            "extra": {
+                "class": "Cascade\\ComposerPlugin\\Installer"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cascade\\ComposerPlugin\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A Composer installer",
+            "time": "2014-01-05 01:10:08"
+        },
+        {
+            "name": "cascade/core",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "ssh://git@akvarko.frozen-doe.net/cascade/core.git",
+                "reference": "60cb7544802e36db598af05980882f3c7d89aedb"
+            },
+            "require": {
+                "cascade/composer-plugin": ">=1.1",
+                "php": ">=5.3.3"
+            },
+            "type": "cascade-core",
+            "autoload": {
+                "psr-4": {
+                    "Cascade\\Core\\": "class/"
+                }
+            },
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Josef Kufner",
+                    "email": "jk@frozen-doe.net"
+                }
+            ],
+            "description": "Core of the framework",
+            "time": "2014-02-11 10:37:05"
+        },
+        {
+            "name": "cascade/gallery",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "ssh://git@akvarko.frozen-doe.net/cascade/plugin/gallery.git",
+                "reference": "d41e83b506ca80a62d95d923c29e5bb5c5b56f54"
+            },
+            "require": {
+                "cascade/composer-plugin": ">=1.1"
+            },
+            "type": "cascade-plugin",
+            "extra": {
+                "plugin": "gallery"
+            },
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Josef Kufner",
+                    "email": "jk@frozen-doe.net"
+                }
+            ],
+            "description": "Photo gallery plugin",
+            "time": "2014-02-16 22:20:36"
+        }
+    ],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "cascade/core": 20,
+        "cascade/gallery": 20,
+        "cascade/admin": 20,
+        "cascade/block_editor": 20
+    },
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
+}

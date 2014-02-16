@@ -1,0 +1,32 @@
+{
+	"name": "frozen-doe.net/gallery",
+	"description": "Photo gallery at gallery.frozen-doe.net",
+	"license": "Apache-2.0",
+	"authors": [
+		{
+			"name": "Josef Kufner",
+			"email": "jk@frozen-doe.net"
+		}
+	],
+	"repositories": [
+		{ "type": "composer", "url": "https://akvarko.frozen-doe.net/composer/" }
+	],
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"require": {
+		"cascade/core": "dev-master",
+		"cascade/gallery": "dev-master",
+		"cascade/admin": "dev-master",
+		"cascade/block_editor": "dev-master"
+	},
+	"autoload": {
+	},
+	"config": {
+		"bin-dir": "bin",
+		"vendor-dir": "lib",
+		"prepend-autoloader": false
+	},
+	"extra": {
+	}
+}
+

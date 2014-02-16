@@ -1,6 +1,0 @@
-[submodule "core"]
-	path = core
-	url = ssh://git@akvarko.frozen-doe.net/pipeline/core.git
-[submodule "plugin/gallery"]
-	path = plugin/gallery
-	url = ssh://git@akvarko.frozen-doe.net/pipeline/plugin/gallery.git
