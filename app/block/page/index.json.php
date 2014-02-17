@@ -7,10 +7,14 @@
     },
     "blocks": {
         "index": {
-            "block": "gallery/index/load"
+            "block": "gallery/index/load",
+            "x": 0,
+            "y": 0
         },
         "show": {
             "block": "gallery/index/show",
+            "x": 209,
+            "y": 0,
             "in_con": {
                 "list": [
                     "index",

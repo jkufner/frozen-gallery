@@ -4,10 +4,17 @@
 		"default_locale": "cs_CZ"
 	},
 	"blocks": {
+		"config": {
+			"block": "core/config"
+		},
+		"gallery_route_postprocessor": {
+			"block": "gallery/route_postprocessor"
+		},
 		"router": {
-			"block": "core/ini/router",
-			"in_val": {
-				"config": "app/routes.ini.php"
+			"block": "core/router",
+			"in_con": {
+				"routes": [ "config", "routes" ],
+				"gallery": [ "gallery_route_postprocessor", "postprocessor" ]
 			}
 		},
 		"skeleton": {
@@ -38,14 +45,14 @@
 			}
 		},
 		"page": {
-			"block": "core/value/cascade_loader",
+			"block": "core/value/block_loader",
 			"in_val": {
 				"output_forward": "done,title"
 			},
 			"in_con": {
-				"content": [
+				"block": [
 					"router",
-					"content"
+					"block"
 				],
 				"enable": [
 					"router",
@@ -55,13 +62,12 @@
 		},
 		"page_title": {
 			"block": "core/out/set_page_title",
-			"force-exec": 1,
+			"force_exec": 1,
 			"in_con": {
 				"title": [
+					":or",
 					"page",
-					"content_0_title"
-				],
-				"title_fallback": [
+					"title",
 					"router",
 					"title"
 				],
@@ -92,7 +98,7 @@
 		},
 		"page_error": {
 			"block": "core/out/message",
-			"force-exec": 1,
+			"force_exec": 1,
 			"in_val": {
 				"is-error": 1,
 				"title": "Sorry!",
@@ -100,9 +106,10 @@
 				"http-status-code": 404
 			},
 			"in_con": {
-				"hide": [
+				"enable": [
+					":not",
 					"page",
-					"content_0_done"
+					"done"
 				]
 			}
 		}
