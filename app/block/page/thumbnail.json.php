@@ -10,7 +10,7 @@
         "create": {
             "block": "gallery/photo/thumbnail",
             "x": 0,
-            "y": 0,
+            "y": 63,
             "in_con": {
                 "gallery": [
                     "router",
@@ -26,19 +26,24 @@
                 ]
             }
         },
-        "show": {
-            "block": "gallery/photo/show",
-            "x": 239,
+        "output": {
+            "block": "core/out/output",
+            "x": 216,
             "y": 0,
             "in_con": {
                 "enable": [
                     "create",
-                    "done"
+                    "thumbnail_file"
                 ],
-                "image": [
+                "filename": [
                     "create",
-                    "thumbnail"
+                    "thumbnail_file"
                 ]
+            },
+            "in_val": {
+                "template": "core/send_file",
+                "slot": "root",
+                "content_type": "image/jpeg"
             }
         }
     }

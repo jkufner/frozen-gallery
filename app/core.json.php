@@ -77,6 +77,16 @@
 				]
 			}
 		},
+		"page_type": {
+			"block": "core/out/set_type",
+			"force_exec": 1,
+			"in_con": {
+				"type": [
+					"router",
+					"type"
+				]
+			}
+		},
 		"page_hd": {
 			"block": "core/out/header",
 			"in_con": {

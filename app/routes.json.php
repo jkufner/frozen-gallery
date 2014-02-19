@@ -84,6 +84,7 @@
 				".tb.jpg": {
 					"skeleton": false,
 					"block": "page/thumbnail",
+					"type": "raw",
 					"size": 120
 				}
 			},
@@ -93,9 +94,8 @@
 				},
 				"is_file": {
 					"skeleton": false,
-					"block": "page/thumbnail",
-					"size": 800,
-					"is_file": true
+					"type": "raw",
+					"block": "page/file"
 				}
 			}
 		},
