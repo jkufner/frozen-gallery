@@ -77,17 +77,25 @@
 			"postprocessor": "gallery",
 			"routes": {
 				"/$gallery/**": {
-					"title": "Gallery",
-					"block": "page/gallery",
-					"connections": {
-					}
+					"title": "Gallery"
 				}
 			},
 			"extensions": {
 				".tb.jpg": {
-					"skeleton": true,
+					"skeleton": false,
 					"block": "page/thumbnail",
 					"size": 120
+				}
+			},
+			"file_checks": {
+				"is_dir": {
+					"block": "page/gallery"
+				},
+				"is_file": {
+					"skeleton": false,
+					"block": "page/thumbnail",
+					"size": 800,
+					"is_file": true
 				}
 			}
 		},
