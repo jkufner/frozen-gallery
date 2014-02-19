@@ -57,23 +57,37 @@
 				}
 			}
 		},
-		"tree": {
+		"gallery": {
 			"defaults": {
 				"skeleton": true
 			},
-			"postprocessor": "gallery",
 			"routes": {
 				"/$gallery": {
 					"title": "Gallery",
 					"block": "page/gallery",
 					"connections": {
 					}
-				},
+				}
+			}
+		},
+		"gallery_content": {
+			"defaults": {
+				"skeleton": true
+			},
+			"postprocessor": "gallery",
+			"routes": {
 				"/$gallery/**": {
 					"title": "Gallery",
 					"block": "page/gallery",
 					"connections": {
 					}
+				}
+			},
+			"extensions": {
+				".tb.jpg": {
+					"skeleton": true,
+					"block": "page/thumbnail",
+					"size": 120
 				}
 			}
 		},
@@ -84,13 +98,6 @@
 				"skeleton": false
 			},
 			"routes": {
-				"/thumbnail/**": {
-					"title": "Thumbnail",
-					"block": "page/thumbnail",
-					"connections": {
-					},
-					"size": 120
-				},
 				"/preview/**": {
 					"title": "Preview",
 					"block": "page/thumbnail",

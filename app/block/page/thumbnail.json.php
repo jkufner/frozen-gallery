@@ -9,27 +9,35 @@
     "blocks": {
         "create": {
             "block": "gallery/photo/thumbnail",
+            "x": 0,
+            "y": 0,
             "in_con": {
+                "gallery": [
+                    "router",
+                    "gallery"
+                ],
+                "path": [
+                    "router",
+                    "path_tail"
+                ],
                 "size": [
                     "router",
                     "size"
-                ],
-                "filename": [
-                    "router",
-                    "path_tail"
                 ]
             }
         },
         "show": {
             "block": "gallery/photo/show",
+            "x": 239,
+            "y": 0,
             "in_con": {
-                "image": [
-                    "create",
-                    "thumbnail"
-                ],
                 "enable": [
                     "create",
                     "done"
+                ],
+                "image": [
+                    "create",
+                    "thumbnail"
                 ]
             }
         }
