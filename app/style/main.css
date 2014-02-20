@@ -8,9 +8,9 @@ html {
 }
 
 body {
-	width: 820px;
+	width: 960px;
 	margin: 0px auto;
-	padding: 20px;
+	padding: 0px 20px;
 	text-align: left;
 	color: #ddd;
 	background: #333;
@@ -91,6 +91,62 @@ ul, ul li {
 	list-style: square;
 }
 
+
+.gallery_listing {
+	text-align: center;
+}
+
+	.gallery_listing .item {
+		display: inline-block;
+		position: relative;
+		padding: 0px 0px 1.2em 0px;
+	}
+
+		.gallery_listing .item .photo,
+		.gallery_listing .item .name {
+			display: block;
+			text-align: center;
+			padding: 0px;
+			margin: 0px;
+		}
+
+		.gallery_listing .item .photo {
+			border: 1px solid #000;
+			min-height: 160px;
+			min-width: 60px;
+			background: #444;
+		}
+
+		.gallery_listing .item .photo img {
+			display: block;
+			margin: 0px auto;
+		}
+
+		.gallery_listing .item .name {
+			font-size: 80%;
+			overflow: hidden;
+			white-space: nowrap;
+			height: 1.2em;
+			padding: 0.1em;
+			margin: 0px;
+			position: absolute;
+			bottom: 0px;
+			left: 1ex;
+			right: 1ex;
+			width: auto;
+			text-overflow: ellipsis;
+		}
+
+	.gallery_listing .item:hover,
+	.gallery_listing .item:focus {
+	}
+
+		.gallery_listing .item:hover *,
+		.gallery_listing .item:focus * {
+			border-color: #ccf;
+		}
+
+/*
 .gallery_listing {
 	overflow: hidden;
 	clear: both;
@@ -131,6 +187,7 @@ ul, ul li {
 		.gallery_listing .item .name {
 			padding: 2px 0px 0px 0px;
 		}
+*/
 
 .version_info {
 	margin: 5em 0em 4em 0em;

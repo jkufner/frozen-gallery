@@ -85,7 +85,7 @@
 					"skeleton": false,
 					"block": "page/thumbnail",
 					"type": "raw",
-					"size": 120
+					"size": 160
 				}
 			},
 			"file_checks": {
