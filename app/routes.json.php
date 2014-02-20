@@ -59,7 +59,8 @@
 		},
 		"gallery": {
 			"defaults": {
-				"skeleton": true
+				"skeleton": true,
+				"path_slash": true
 			},
 			"routes": {
 				"/$gallery": {
@@ -72,7 +73,8 @@
 		},
 		"gallery_content": {
 			"defaults": {
-				"skeleton": true
+				"skeleton": true,
+				"path_slash": true
 			},
 			"postprocessor": "gallery",
 			"routes": {
@@ -85,7 +87,8 @@
 					"skeleton": false,
 					"block": "page/thumbnail",
 					"type": "raw",
-					"size": 160
+					"size": 160,
+					"path_slash": false
 				}
 			},
 			"file_checks": {
@@ -95,7 +98,8 @@
 				"is_file": {
 					"skeleton": false,
 					"type": "raw",
-					"block": "page/file"
+					"block": "page/file",
+					"path_slash": false
 				}
 			}
 		},
