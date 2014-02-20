@@ -12,7 +12,7 @@
         "gallery": {
             "block": "gallery/gallery/load",
             "x": 0,
-            "y": 209,
+            "y": 0,
             "in_con": {
                 "gallery": [
                     "router",
@@ -27,7 +27,7 @@
         "show": {
             "block": "gallery/gallery/show",
             "x": 267,
-            "y": 209,
+            "y": 0,
             "in_con": {
                 "list": [
                     "gallery",
@@ -35,13 +35,14 @@
                 ]
             },
             "in_val": {
+                "slot": "below",
                 "slot_weight": 40
             }
         },
         "others": {
             "block": "core/out/menu",
             "x": 267,
-            "y": 359,
+            "y": 150,
             "in_con": {
                 "items": [
                     "gallery",
@@ -50,21 +51,6 @@
             },
             "in_val": {
                 "slot_weight": 30
-            }
-        },
-        "path_header": {
-            "block": "core/out/header",
-            "x": 263,
-            "y": 0,
-            "in_val": {
-                "level": 2,
-                "slot_weight": 10
-            },
-            "in_con": {
-                "text": [
-                    "router",
-                    "path"
-                ]
             }
         }
     }

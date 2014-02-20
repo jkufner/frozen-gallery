@@ -1,19 +1,33 @@
 @import url(/core/style/basic.css);
 
-html {
+html, body {
 	color: #fff;
 	background: #000;
+	margin: 0px;
+	padding: 0px;
 	text-align: center;
 	font-family: "DejaVu Sans", sans-serif;
 }
 
-body {
-	width: 960px;
-	margin: 0px auto;
-	padding: 0px 20px;
+.slot_above {
+	position: relative;
+	margin: 0px auto 2em auto;
+	padding: 0px;
 	text-align: left;
 	color: #ddd;
 	background: #333;
+}
+
+.slot_default {
+	max-width: 50em;
+	margin: 0em auto;
+	text-align: left;
+}
+
+.slot_below {
+	width: auto;
+	margin: 1em 2em 4em 2em;
+	padding: 0px;
 }
 
 a {
@@ -21,7 +35,7 @@ a {
 }
 
 a:focus, a:hover {
-	color: #ccf;
+	color: #ccf !important;
 	text-shadow: 0px 0px 1em #7ae;
 }
 
@@ -35,7 +49,6 @@ a img {
 }
 
 h1 {
-	border-bottom: 1px solid #888;
 	padding: 1em 0px;
 	margin: 0em;
 }
@@ -189,19 +202,21 @@ ul, ul li {
 		}
 */
 
-.version_info {
-	margin: 5em 0em 4em 0em;
-	padding: 1ex 0em;
-	border-top: 1px solid #888;
-	text-align: center;
+#\.skeleton\.version {
+	margin: 0em;
+	padding: 1ex 1em;
+	text-align: right;
+	position: absolute;
+	top: 0px;
+	right: 0px;
 }
 
-	.version_info a {
+	#\.skeleton\.version a {
 		color: #666;
 		text-decoration: none;
 	}
-		.version_info a:hover,
-		.version_info a:focus {
+		#\.skeleton\.version a:hover,
+		#\.skeleton\.version a:focus {
 			text-decoration: underline;
 		}
 

@@ -48,7 +48,7 @@
 					}
 				},
 				"/version": {
-					"title": "Profiler",
+					"title": "Version",
 					"block": "page/version"
 				},
 				"/profiler": {
