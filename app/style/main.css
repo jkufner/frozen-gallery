@@ -1,21 +1,20 @@
 @import url(/core/style/basic.css);
 
 html, body {
-	color: #fff;
 	background: #000;
 	margin: 0px;
 	padding: 0px;
 	text-align: center;
 	font-family: "DejaVu Sans", sans-serif;
+	color: #ddd;
+	background: #333;
 }
 
 .slot_above {
+	width: auto;
 	position: relative;
-	margin: 0px auto 2em auto;
-	padding: 0px;
-	text-align: left;
-	color: #ddd;
-	background: #333;
+	margin: 0em auto 2em auto;
+	padding: 0em;
 }
 
 .slot_default {
@@ -26,8 +25,8 @@ html, body {
 
 .slot_below {
 	width: auto;
-	margin: 1em 2em 4em 2em;
-	padding: 0px;
+	margin: 2em 2em 4em 2em;
+	padding: 0em;
 }
 
 a {
@@ -113,6 +112,7 @@ ul, ul li {
 		display: inline-block;
 		position: relative;
 		padding: 0px 0px 1.2em 0px;
+		margin: 0em 0.3ex;
 	}
 
 		.gallery_listing .item .photo,
@@ -124,10 +124,12 @@ ul, ul li {
 		}
 
 		.gallery_listing .item .photo {
+			position: relative;
 			border: 1px solid #000;
 			min-height: 160px;
 			min-width: 60px;
 			background: #444;
+			box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
 		}
 
 		.gallery_listing .item .photo img {
@@ -159,48 +161,12 @@ ul, ul li {
 			border-color: #ccf;
 		}
 
-/*
-.gallery_listing {
-	overflow: hidden;
-	clear: both;
-}
-	.gallery_listing .item {
-		display: block;
-		float: left;
-		width: 140px;
-		height: 136px;
-		overflow: hidden;
-
-		margin: 10px;
-		padding: 8px 0px 4px 0px;
-		border: 1px solid #888;
-		background: #222;
-		font-size: 80%;
-		text-align: center;
-		text-decoration: none;
+	.gallery_listing .item:active .photo {
+		left: 1px;
+		top: 1px;
+		box-shadow: none;
 	}
-		.gallery_listing .item:hover,
-		.gallery_listing .item:focus {
-			border-color: #ccc;
-		}
-		.gallery_listing .item .photo,
-		.gallery_listing .item .name {
-			display: block;
-			text-align: center;
-			margin: auto;
-			vertical-align: center;
-		}
-		.gallery_listing .item .photo {
-			width: 120px;
-			line-height: 120px;
-		}
-			.gallery_listing .item .photo img {
-				vertical-align: middle;
-			}
-		.gallery_listing .item .name {
-			padding: 2px 0px 0px 0px;
-		}
-*/
+
 
 #\.skeleton\.version {
 	margin: 0em;

@@ -6,8 +6,8 @@
     "blocks": {
         "version": {
             "block": "core/devel/version",
-            "x": 440,
-            "y": 225,
+            "x": 465,
+            "y": 193,
             "in_con": {
                 "enable": [
                     "above",
@@ -26,8 +26,8 @@
         },
         "page_title": {
             "block": "core/out/set_page_title",
-            "x": 10,
-            "y": 35,
+            "x": 32,
+            "y": 42,
             "in_con": {
                 "title": [
                     ":or",
@@ -44,11 +44,11 @@
         },
         "page_hd": {
             "block": "core/out/header",
-            "x": 634,
+            "x": 465,
             "y": 0,
             "in_con": {
                 "enable": [
-                    "main",
+                    "above",
                     "done"
                 ],
                 "text": [
@@ -56,7 +56,7 @@
                     "title"
                 ],
                 "slot": [
-                    "main",
+                    "above",
                     "name"
                 ]
             },
@@ -69,7 +69,7 @@
         "page_error": {
             "block": "core/out/message",
             "x": 0,
-            "y": 412,
+            "y": 490,
             "in_con": {
                 "enable": [
                     ":not",
@@ -86,8 +86,8 @@
         },
         "below": {
             "block": "core/out/slot",
-            "x": 219,
-            "y": 339,
+            "x": 220,
+            "y": 424,
             "in_con": {
                 "enable": [
                     "page",
@@ -103,7 +103,7 @@
         "page": {
             "block": "core/out/page",
             "x": 27,
-            "y": 272,
+            "y": 350,
             "in_con": {
                 "enable": [
                     "router",
@@ -116,27 +116,8 @@
         },
         "main": {
             "block": "core/out/slot",
-            "x": 441,
-            "y": 88,
-            "in_con": {
-                "enable": [
-                    "above",
-                    "done"
-                ],
-                "slot": [
-                    "above",
-                    "name"
-                ]
-            },
-            "in_val": {
-                "slot_weight": 60,
-                "name": "default"
-            }
-        },
-        "above": {
-            "block": "core/out/slot",
             "x": 219,
-            "y": 205,
+            "y": 290,
             "in_con": {
                 "enable": [
                     "page",
@@ -146,6 +127,22 @@
             "in_val": {
                 "slot": "html_body",
                 "slot_weight": 40,
+                "name": "default"
+            }
+        },
+        "above": {
+            "block": "core/out/slot",
+            "x": 220,
+            "y": 155,
+            "in_con": {
+                "enable": [
+                    "page",
+                    "done"
+                ]
+            },
+            "in_val": {
+                "slot": "html_body",
+                "slot_weight": 20,
                 "name": "above"
             }
         }
