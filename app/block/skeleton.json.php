@@ -6,8 +6,8 @@
     "blocks": {
         "version": {
             "block": "core/devel/version",
-            "x": 465,
-            "y": 193,
+            "x": 473,
+            "y": 184,
             "in_con": {
                 "enable": [
                     "above",
@@ -27,7 +27,7 @@
         "page_title": {
             "block": "core/out/set_page_title",
             "x": 32,
-            "y": 42,
+            "y": 70,
             "in_con": {
                 "title": [
                     ":or",
@@ -44,7 +44,7 @@
         },
         "page_hd": {
             "block": "core/out/header",
-            "x": 465,
+            "x": 473,
             "y": 0,
             "in_con": {
                 "enable": [
@@ -69,7 +69,7 @@
         "page_error": {
             "block": "core/out/message",
             "x": 0,
-            "y": 490,
+            "y": 518,
             "in_con": {
                 "enable": [
                     ":not",
@@ -86,8 +86,8 @@
         },
         "below": {
             "block": "core/out/slot",
-            "x": 220,
-            "y": 424,
+            "x": 240,
+            "y": 556,
             "in_con": {
                 "enable": [
                     "page",
@@ -103,7 +103,7 @@
         "page": {
             "block": "core/out/page",
             "x": 27,
-            "y": 350,
+            "y": 378,
             "in_con": {
                 "enable": [
                     "router",
@@ -116,8 +116,8 @@
         },
         "main": {
             "block": "core/out/slot",
-            "x": 219,
-            "y": 290,
+            "x": 237,
+            "y": 425,
             "in_con": {
                 "enable": [
                     "page",
@@ -132,8 +132,8 @@
         },
         "above": {
             "block": "core/out/slot",
-            "x": 220,
-            "y": 155,
+            "x": 234,
+            "y": 166,
             "in_con": {
                 "enable": [
                     "page",
@@ -144,6 +144,40 @@
                 "slot": "html_body",
                 "slot_weight": 20,
                 "name": "above"
+            }
+        },
+        "breadcrumbs": {
+            "block": "gallery/breadcrumbs",
+            "x": 474,
+            "y": 358,
+            "in_con": {
+                "enable": [
+                    "navbar",
+                    "done"
+                ],
+                "slot": [
+                    "navbar",
+                    "name"
+                ]
+            },
+            "in_val": {
+                "slot_weight": 30
+            }
+        },
+        "navbar": {
+            "block": "core/out/slot",
+            "x": 237,
+            "y": 297,
+            "in_con": {
+                "enable": [
+                    "page",
+                    "done"
+                ]
+            },
+            "in_val": {
+                "slot": "html_body",
+                "slot_weight": 30,
+                "name": "navbar"
             }
         }
     }
