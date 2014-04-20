@@ -43,7 +43,8 @@
             "in_val": {
                 "template": "core/send_file",
                 "slot": "root",
-                "content_type": "image/jpeg"
+                "content_type": "image/jpeg",
+                "expires": "now + 1 day"
             }
         }
     }

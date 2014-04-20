@@ -11,7 +11,8 @@
             "y": 0,
             "in_val": {
                 "template": "core/send_file",
-                "slot": "root"
+                "slot": "root",
+		"expires": "now + 1 day"
             },
             "in_con": {
                 "filename": [
