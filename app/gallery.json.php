@@ -3,6 +3,7 @@
     "path_prefix": "data/gallery/",
     "url_prefix": "/",
     "url_thumbnail_ext": ".tb.jpg",
-    "resize_mode": "same_height"
+    "resize_mode": "same_height",
+    "thumbnail_size": 160
 }
 

@@ -89,7 +89,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@akvarko.frozen-doe.net/cascade/core.git",
-                "reference": "c404f0aee30b71ae1195e0c26e577c557ad345e4"
+                "reference": "254a6f35580893f5504fb59e3e9ece75fd547a26"
             },
             "require": {
                 "cascade/composer-plugin": ">=1.1",
@@ -111,7 +111,7 @@
                 }
             ],
             "description": "Core of the framework",
-            "time": "2014-04-20 23:35:08"
+            "time": "2014-04-27 08:43:20"
         },
         {
             "name": "cascade/gallery",
@@ -119,7 +119,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@akvarko.frozen-doe.net/cascade/plugin/gallery.git",
-                "reference": "7427e92a974fd2937dd81e49f9f6a45ad66bcd5b"
+                "reference": "09edf52990f918725b3e58b815e5f50999934f25"
             },
             "require": {
                 "cascade/composer-plugin": ">=1.1"
@@ -138,7 +138,7 @@
                 }
             ],
             "description": "Photo gallery plugin",
-            "time": "2014-04-25 08:28:16"
+            "time": "2014-04-29 23:20:19"
         }
     ],
     "packages-dev": [
