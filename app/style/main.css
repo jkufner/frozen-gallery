@@ -158,8 +158,8 @@ ul, ul li {
 		.gallery_listing .item .photo {
 			position: relative;
 			border: 1px solid #000;
-			min-height: 160px;
-			min-width: 100px;
+			/* min-height: 160px; */
+			/* min-width: 100px; */
 			background: #444;
 			box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
 		}
