@@ -1,7 +1,8 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
     "hash": "9b0c656434a5a622a1f81126ad9d23b8",
     "packages": [
@@ -10,7 +11,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@akvarko.frozen-doe.net/cascade/plugin/admin.git",
+                "url": "git@git.frozen-doe.net:cascade/administration.git",
                 "reference": "8e43bf05abe0040b9aa190b087fb21ed2e0c5c53"
             },
             "require": {
@@ -37,7 +38,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@akvarko.frozen-doe.net/cascade/plugin/block_editor.git",
+                "url": "git@git.frozen-doe.net:cascade/block-editor.git",
                 "reference": "e672d0b2849fddbc36b517abb568709fd9997fc2"
             },
             "require": {
@@ -65,7 +66,7 @@
             "version": "v1.1",
             "source": {
                 "type": "git",
-                "url": "ssh://git@akvarko.frozen-doe.net/cascade/composer-plugin.git",
+                "url": "git@git.frozen-doe.net:cascade/composer-plugin.git",
                 "reference": "cbad9e45ab2fde398e2a741d594acd90c54b8f2b"
             },
             "type": "composer-installer",
@@ -88,7 +89,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@akvarko.frozen-doe.net/cascade/core.git",
+                "url": "git@git.frozen-doe.net:cascade/core.git",
                 "reference": "254a6f35580893f5504fb59e3e9ece75fd547a26"
             },
             "require": {
@@ -118,7 +119,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@akvarko.frozen-doe.net/cascade/plugin/gallery.git",
+                "url": "git@git.frozen-doe.net:cascade/gallery.git",
                 "reference": "09edf52990f918725b3e58b815e5f50999934f25"
             },
             "require": {
