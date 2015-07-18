@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "hash": "9b0c656434a5a622a1f81126ad9d23b8",
@@ -120,7 +120,7 @@
             "source": {
                 "type": "git",
                 "url": "git@git.frozen-doe.net:cascade/gallery.git",
-                "reference": "09edf52990f918725b3e58b815e5f50999934f25"
+                "reference": "385b28f47457b8a1db69732d3dfd74227ddbfe3f"
             },
             "require": {
                 "cascade/composer-plugin": ">=1.1"
@@ -139,15 +139,11 @@
                 }
             ],
             "description": "Photo gallery plugin",
-            "time": "2014-04-29 23:20:19"
+            "time": "2015-07-18 18:08:46"
         }
     ],
-    "packages-dev": [
-
-    ],
-    "aliases": [
-
-    ],
+    "packages-dev": [],
+    "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
         "cascade/core": 20,
@@ -155,10 +151,8 @@
         "cascade/admin": 20,
         "cascade/block_editor": 20
     },
-    "platform": [
-
-    ],
-    "platform-dev": [
-
-    ]
+    "prefer-stable": true,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
 }
