@@ -111,7 +111,15 @@
                 ]
             },
             "in_val": {
-                "css_link": "/app/style/main.css"
+                "css_link": [
+                    "/app/js/lib/fancybox/source/jquery.fancybox.css",
+                    "/app/style/main.css"
+                ],
+                "js_link": [
+                    "/app/js/lib/fancybox/lib/jquery-1.9.0.min.js",
+                    "/app/js/lib/fancybox/source/jquery.fancybox.pack.js",
+                    "/app/js/main.js"
+                ]
             }
         },
         "main": {

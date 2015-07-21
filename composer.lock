@@ -12,10 +12,11 @@
             "source": {
                 "type": "git",
                 "url": "git@git.frozen-doe.net:cascade/administration.git",
-                "reference": "8e43bf05abe0040b9aa190b087fb21ed2e0c5c53"
+                "reference": "b96c10a9d30c656e8559e6bcbb185d9d89f51bda"
             },
             "require": {
-                "cascade/composer-plugin": ">=1.1"
+                "cascade/composer-plugin": ">=1.1",
+                "cascade/core": ">=0.11"
             },
             "type": "cascade-plugin",
             "extra": {
@@ -31,7 +32,7 @@
                 }
             ],
             "description": "Administration infrastructure",
-            "time": "2014-01-22 14:06:25"
+            "time": "2015-06-06 16:26:54"
         },
         {
             "name": "cascade/block_editor",
@@ -39,7 +40,7 @@
             "source": {
                 "type": "git",
                 "url": "git@git.frozen-doe.net:cascade/block-editor.git",
-                "reference": "e672d0b2849fddbc36b517abb568709fd9997fc2"
+                "reference": "02ad1a74c98ee3922dcc2ef1d1b79ae32c71d784"
             },
             "require": {
                 "cascade/admin": "dev-master",
@@ -55,11 +56,15 @@
             "authors": [
                 {
                     "name": "Josef Kufner",
-                    "email": "jk@frozen-doe.net"
+                    "email": "josef@kufner.cz"
+                },
+                {
+                    "name": "Martin Adámek",
+                    "email": "adamema4@fel.cvut.cz"
                 }
             ],
             "description": "Visual block editor",
-            "time": "2014-01-29 23:27:35"
+            "time": "2015-05-20 16:23:15"
         },
         {
             "name": "cascade/composer-plugin",
@@ -90,10 +95,13 @@
             "source": {
                 "type": "git",
                 "url": "git@git.frozen-doe.net:cascade/core.git",
-                "reference": "254a6f35580893f5504fb59e3e9ece75fd547a26"
+                "reference": "c99f4168e19975ef762dbe4a2b10dd8f1805379d"
             },
             "require": {
                 "cascade/composer-plugin": ">=1.1",
+                "ext-apcu": "*",
+                "ext-gettext": "*",
+                "ext-json": "*",
                 "php": ">=5.3.3"
             },
             "type": "cascade-core",
@@ -112,7 +120,7 @@
                 }
             ],
             "description": "Core of the framework",
-            "time": "2014-04-27 08:43:20"
+            "time": "2015-07-21 14:08:46"
         },
         {
             "name": "cascade/gallery",
@@ -120,7 +128,7 @@
             "source": {
                 "type": "git",
                 "url": "git@git.frozen-doe.net:cascade/gallery.git",
-                "reference": "385b28f47457b8a1db69732d3dfd74227ddbfe3f"
+                "reference": "4e7486b1dc4e4bbaab8614bc18fa48c661700863"
             },
             "require": {
                 "cascade/composer-plugin": ">=1.1"
@@ -139,7 +147,7 @@
                 }
             ],
             "description": "Photo gallery plugin",
-            "time": "2015-07-18 18:08:46"
+            "time": "2015-07-21 14:45:02"
         }
     ],
     "packages-dev": [],

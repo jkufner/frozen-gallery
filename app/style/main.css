@@ -70,6 +70,11 @@ a:focus, a:hover {
 	color: #000 !important;
 }
 
+#_cascade_graph.cascade_iframe h2 {
+	opacity: 0.1;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+	filter: alpha(opacity=10);
+}
 
 p, table, pre {
 	margin: 1em 0px;
@@ -217,5 +222,4 @@ ul, ul li {
 		#\.skeleton\.version a:focus {
 			text-decoration: underline;
 		}
-
 
