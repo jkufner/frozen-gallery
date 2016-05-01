@@ -5,6 +5,7 @@
         "This file is @generated automatically"
     ],
     "hash": "9b0c656434a5a622a1f81126ad9d23b8",
+    "content-hash": "a1dba20af52d7068126bf388a0ad6872",
     "packages": [
         {
             "name": "cascade/admin",
@@ -40,7 +41,7 @@
             "source": {
                 "type": "git",
                 "url": "git@git.frozen-doe.net:cascade/block-editor.git",
-                "reference": "02ad1a74c98ee3922dcc2ef1d1b79ae32c71d784"
+                "reference": "fa1638b416a9376e0f123456d01f2af13d289692"
             },
             "require": {
                 "cascade/admin": "dev-master",
@@ -64,7 +65,7 @@
                 }
             ],
             "description": "Visual block editor",
-            "time": "2015-05-20 16:23:15"
+            "time": "2016-02-29 22:29:06"
         },
         {
             "name": "cascade/composer-plugin",
@@ -95,7 +96,7 @@
             "source": {
                 "type": "git",
                 "url": "git@git.frozen-doe.net:cascade/core.git",
-                "reference": "c99f4168e19975ef762dbe4a2b10dd8f1805379d"
+                "reference": "01311832de561acb593897614d45119219d35192"
             },
             "require": {
                 "cascade/composer-plugin": ">=1.1",
@@ -120,7 +121,7 @@
                 }
             ],
             "description": "Core of the framework",
-            "time": "2015-07-21 14:08:46"
+            "time": "2016-05-01 23:23:32"
         },
         {
             "name": "cascade/gallery",
