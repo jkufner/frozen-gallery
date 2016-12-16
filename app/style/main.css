@@ -26,8 +26,7 @@ body {
 }
 
 	.slot_navbar .gallery_breadcrumbs {
-		max-width: 50em;
-		text-align: left;
+		text-align: center;
 		margin: 0em auto;
 		padding: 1ex 0em;
 	}
