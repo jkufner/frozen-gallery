@@ -53,6 +53,9 @@ body {
 
 	.slot_default .gallery_dav_link {
 		text-align: center;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
 	}
 		.slot_default .gallery_dav_link,
 		.slot_default .gallery_dav_link a {
