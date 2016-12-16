@@ -129,7 +129,7 @@
             "source": {
                 "type": "git",
                 "url": "git@git.frozen-doe.net:cascade/gallery.git",
-                "reference": "9aff8619d08d1a218af23b12d1ef4310c27c7ef9"
+                "reference": "16dab7f36f9bf1dd12c8d384c2621e2527d4b8cc"
             },
             "require": {
                 "cascade/composer-plugin": ">=1.1"
@@ -148,7 +148,7 @@
                 }
             ],
             "description": "Photo gallery plugin",
-            "time": "2016-12-16 22:28:20"
+            "time": "2016-12-16 22:36:34"
         }
     ],
     "packages-dev": [],
