@@ -24,6 +24,21 @@
                 ]
             }
         },
+        "show_dav_link": {
+            "block": "gallery/gallery/show_dav_link",
+            "x": 240,
+            "y": 0,
+            "in_con": {
+                "dav_url": [
+                    "gallery",
+                    "dav_url"
+                ]
+            },
+            "in_val": {
+                "slot": "default",
+                "slot_weight": 20
+            }
+        },
         "show": {
             "block": "gallery/gallery/show",
             "x": 267,

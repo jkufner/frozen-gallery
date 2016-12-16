@@ -51,6 +51,14 @@ body {
 	text-align: left;
 }
 
+	.slot_default .gallery_dav_link {
+		text-align: center;
+	}
+		.slot_default .gallery_dav_link,
+		.slot_default .gallery_dav_link a {
+			color: #888;
+		}
+
 .slot_below {
 	margin-bottom: 30%;
 }

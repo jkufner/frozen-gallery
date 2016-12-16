@@ -4,6 +4,7 @@
     "index_file": "data/gallery/index.list",
     "url_prefix": "/",
     "url_thumbnail_ext": ".tb.jpg",
+    "dav_url_fmt": "webdavs://gallery.frozen-doe.net/dav/{directory}",
     "resize_mode": "same_height",
     "thumbnail_size": 160
 }
