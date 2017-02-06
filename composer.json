@@ -14,7 +14,7 @@
 	"minimum-stability": "dev",
 	"prefer-stable": true,
 	"require": {
-		"cascade/core": "dev-master",
+		"cascade/core": "1.0",
 		"cascade/gallery": "dev-master",
 		"cascade/admin": "dev-master",
 		"cascade/block_editor": "dev-master"

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9b0c656434a5a622a1f81126ad9d23b8",
-    "content-hash": "a1dba20af52d7068126bf388a0ad6872",
+    "hash": "67c16f662c2f556baf1c187d47eabf42",
+    "content-hash": "ad195afb00e9a715fe8f7469ca82d459",
     "packages": [
         {
             "name": "cascade/admin",
@@ -92,11 +92,11 @@
         },
         {
             "name": "cascade/core",
-            "version": "dev-master",
+            "version": "v1.0",
             "source": {
                 "type": "git",
                 "url": "git@git.frozen-doe.net:cascade/core.git",
-                "reference": "01311832de561acb593897614d45119219d35192"
+                "reference": "8117217fa6a583d96eedf8352d02a40536a67bd4"
             },
             "require": {
                 "cascade/composer-plugin": ">=1.1",
@@ -121,7 +121,7 @@
                 }
             ],
             "description": "Core of the framework",
-            "time": "2016-05-01 23:23:32"
+            "time": "2016-12-01 19:43:15"
         },
         {
             "name": "cascade/gallery",
@@ -155,7 +155,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "cascade/core": 20,
         "cascade/gallery": 20,
         "cascade/admin": 20,
         "cascade/block_editor": 20
