@@ -233,3 +233,16 @@ ul, ul li {
 			text-decoration: underline;
 		}
 
+.mfp-arrow {
+	opacity: 0.15;
+}
+
+	.mfp-arrow:focus {
+		opacity: 0.15;
+	}
+
+	.mfp-arrow:hover,
+	.mfp-arrow:focus:hover {
+		opacity: 1;
+	}
+

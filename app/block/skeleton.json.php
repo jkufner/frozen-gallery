@@ -112,12 +112,12 @@
             },
             "in_val": {
                 "css_link": [
-                    "/app/js/lib/fancybox/source/jquery.fancybox.css",
+                    "/app/js/lib/magnific-popup.css",
                     "/app/style/main.css"
                 ],
                 "js_link": [
-                    "/app/js/lib/fancybox/lib/jquery-1.9.0.min.js",
-                    "/app/js/lib/fancybox/source/jquery.fancybox.pack.js",
+                    "/app/js/lib/jquery-3.2.0.min.js",
+                    "/app/js/lib/jquery.magnific-popup.min.js",
                     "/app/js/main.js"
                 ]
             }
