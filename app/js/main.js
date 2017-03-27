@@ -3,7 +3,8 @@ $(document).ready(function()
 	$('.gallery_listing a.item').magnificPopup({
 		type:'image',
 		gallery: {
-			enabled: true
+			enabled: true,
+			preloadAfterLoad: true
 		},
 		image: {
 			titleSrc: function(item) {
