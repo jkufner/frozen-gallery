@@ -1,0 +1,17 @@
+index:
+        path: /
+        defaults:
+                _controller: "Gallery\\Controller\\GalleryController::indexAction"
+
+gallery:
+        path: /{gallery}/
+        defaults:
+                _controller: "Gallery\\Controller\\GalleryController::galleryAction"
+
+gallery-path:
+        path: /{gallery}/{path}
+        defaults:
+                _controller: "Gallery\\Controller\\GalleryController::galleryAction"
+        requirements:
+                path: ".*"
+

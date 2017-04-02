@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+<table class="gallery_index table">
+	<col><col width="100%"><col>
+	<thead>
+		<tr>
+			<th>Date</th>
+			<th>Title</th>
+			<th>Modified</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for item in list %}
+		<tr>
+			<td class="date" nowrap>{{ item.date | date(gallery.date_format) }}</td>
+			<td class="title"><a href="{{ item.url }}">{{ item.title }}</a></td>
+			<td class="mtime" nowrap>{{ item.mtime | date(gallery.datetime_format) }}</td>
+		</tr>
+	{% endfor %}
+	</tbody>
+</table>
+{% endblock %}
+

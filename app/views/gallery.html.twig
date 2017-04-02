@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+
+{% if others %}
+<ul class="gallery_listing">
+{% for item in  others %}
+	<li>
+		<a href="{{item.link}}">{{item.title}}</a>
+		{%- if item.size != null %} <small>({{ item.size }})</small>{% endif %}
+	</li>
+{% endfor%}
+</ul>
+
+{% endif %}
+<div class="gallery_listing">
+{% for item in list %}
+	<a class="item" href="{{ item.url }}">
+		<span class="photo">
+			<img src="{{ item.tb_url }}" alt="[thumbnail]"
+				{%- if item.tb_width is defined %} width="{{ item.tb_width | round }}"{% endif -%}
+				{%- if item.tb_height is defined %} height="{{ item.tb_height | round }}"{% endif -%}>
+		</span>
+		<span class="name">{{ item.filename }}</span>
+	</a>
+{% endfor %}
+</div>
+{% endblock %}
+

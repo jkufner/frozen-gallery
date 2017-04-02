@@ -1,32 +1,28 @@
 {
-	"name": "frozen-doe.net/gallery",
-	"description": "Photo gallery at gallery.frozen-doe.net",
-	"license": "Apache-2.0",
-	"authors": [
-		{
-			"name": "Josef Kufner",
-			"email": "jk@frozen-doe.net"
-		}
-	],
-	"repositories": [
-		{ "type": "composer", "url": "https://akvarko.frozen-doe.net/composer/" }
-	],
-	"minimum-stability": "dev",
-	"prefer-stable": true,
-	"require": {
-		"cascade/core": "1.0",
-		"cascade/gallery": "dev-master",
-		"cascade/admin": "dev-master",
-		"cascade/block_editor": "dev-master"
-	},
-	"autoload": {
-	},
-	"config": {
-		"bin-dir": "bin",
-		"vendor-dir": "lib",
-		"prepend-autoloader": false
-	},
-	"extra": {
-	}
+    "name": "frozen-doe.net/gallery",
+    "description": "Photo gallery at gallery.frozen-doe.net",
+    "type": "project",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Josef Kufner",
+            "email": "josef@kufner.cz"
+        }
+    ],
+    "require": {
+        "symfony/framework-bundle": "^3.2",
+        "symfony/templating": "^3.2",
+        "symfony/translation": "^3.2",
+        "symfony/twig-bundle": "^3.2",
+        "symfony/yaml": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gallery\\": [ "app/class/" ]
+        },
+        "classmap": [
+            "app/AppKernel.php"
+        ]
+    }
 }
 

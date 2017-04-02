@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>{{title}}</title>
+	<link  href="/app/js/lib/magnific-popup.css" rel="stylesheet" type="text/css">
+	<link  href="/app/style/main.css" rel="stylesheet" type="text/css">
+	<script src="/app/js/lib/jquery-3.2.0.min.js" type="text/javascript"></script>
+	<script src="/app/js/lib/jquery.magnific-popup.min.js" type="text/javascript"></script>
+	<script src="/app/js/main.js" type="text/javascript"></script>
+</head>
+<body>
+<header>
+{% block header %}
+	<h1>
+		<a href="/">{{title}}</a>
+	</h1>
+	{% if date is defined %}
+		<time class="title" datetime="{{ date | date(gallery.date_format) }}">
+		{{date|date(gallery.date_format)}}
+	</time>
+	{% endif %}
+	{% if breadcrumbs %}
+	<nav>
+		<div>
+			{% for item in breadcrumbs %}
+			<a href="{{ item.url }}">{{ item.label }}</a>
+			<span>❭</span>
+			{% endfor %}
+		</div>
+	</nav>
+	{% endif %}
+{% endblock %}
+</header>
+<main>
+{% if dav_url is defined %}
+<div class="gallery_dav_link">
+	WebDAV access: <a href="{{ dav_url }}"><code>{{ dav_url }}</code></a>
+</div>
+{% endif %}
+{% block main %}
+{% endblock %}
+</main>
+</body>
+</html>
+
