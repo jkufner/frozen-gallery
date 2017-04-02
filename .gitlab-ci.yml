@@ -1,0 +1,15 @@
+stages:
+        - deploy
+deploy:
+        stage: deploy
+        environment: $CI_BUILD_REF_SLUG
+        only:
+                - master
+        cache:
+                paths:
+                        - vendor/
+        script:
+                - 'test -n "$WEB_INSTALL_DESTINATIONS"'
+                - 'composer install'
+                - 'for d in $WEB_INSTALL_DESTINATIONS ; do echo $d; [ -d "$d" ] && ./app/bin/deploy "$d" ; echo ; done'
+
