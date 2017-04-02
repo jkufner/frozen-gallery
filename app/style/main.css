@@ -35,26 +35,20 @@ small {
 
 header,
 main,
-footer,
-.slot_above,
-.slot_navbar,
-.slot_default,
-.slot_below {
+footer {
 	width: auto;
 	position: relative;
 	margin: 0em;
 	padding: 0em;
 }
 
-header nav,
-.slot_navbar {
+header nav {
 	background: #222;
 }
 
-	header nav,
-	.slot_navbar .gallery_breadcrumbs {
+	header nav {
 		margin: 0em auto;
-		padding: 1ex 0em;
+		padding: 0em;
 	}
 
 	header nav {
@@ -65,60 +59,81 @@ header nav,
 		overflow: hidden;
 	}
 
-	header nav div {
-		display: inline;
+	header nav ul {
+		display: flex;
+		list-style: none;
 		margin: 0em auto;
+		padding: 0em 3em 0em 0em;
 		flex-basis: 65em;
 	}
-	
 
-	header nav span,
-	.slot_navbar .gallery_breadcrumbs span {
-		position: relative;
+	header nav ul li {
+		list-style: none;
+		margin: 0em;
+		padding: 0em;
 		display: inline-block;
-		font-size: 3em;
-		top: 0.15em;
-		margin: -1em 0em;
-		color: #333;
-		background: #222;
 	}
 
-	header nav a,
-	.slot_navbar .gallery_breadcrumbs a {
-		text-decoration: none;
-		padding: 0em 0.5em;
-		background: #222;
+	header nav ul li a {
+		height: 100%;
+		display: block;
 		position: relative;
+		left: -2.5em;
+		padding: 0.5em 1em 0.5em 2.5em;
+		margin: 0em;
 	}
+
+	header nav ul li a:hover,
+	header nav ul li a:focus {
+		background: #000;
+		text-decoration: none;
+	}
+
+	header nav ul li a:hover:after,
+	header nav ul li a:focus:after {
+		border-left-color: #000;
+	}
+
+	header nav ul li a:before,
+	header nav ul li a:after {
+		content: " ";
+		display: block;
+		position: absolute;
+		top: 50%;
+		width: 0px;
+		height: 0px;
+		border-top: 3em solid transparent;
+		border-bottom: 3em solid transparent;
+		border-left: 2em solid #222;
+		margin-top: -3em; 
+		right: -1em;
+		z-index: 2;
+	}
+
+	header nav ul li a:before {
+		border-left-color: #333;
+		right: -1.3em;
+		z-index: 1;
+	}
+
 
 main {
 	margin: 1em 3% 20% 3%;
 
 }
 
-.slot_default {
-	max-width: 50em;
-	margin: 0em auto;
-	padding: 1em 0em;
-	text-align: left;
-}
-
-	main .gallery_dav_link,
-	.slot_default .gallery_dav_link {
+	main .gallery_dav_link {
 		text-align: center;
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		overflow: hidden;
 	}
 		main .gallery_dav_link,
-		main .gallery_dav_link a,
-		.slot_default .gallery_dav_link,
-		.slot_default .gallery_dav_link a {
+		main .gallery_dav_link a {
 			color: #888;
 		}
 
-footer,
-.slot_below {
+footer {
 	margin-bottom: 30%;
 }
 
@@ -131,16 +146,6 @@ a {
 a:focus, a:hover {
 	color: #ccf !important;
 	text-shadow: 0px 0px 1em #7ae;
-}
-
-#_cascade_graph.cascade_iframe h2 a {
-	color: #000 !important;
-}
-
-#_cascade_graph.cascade_iframe h2 {
-	opacity: 0.1;
-	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
-	filter: alpha(opacity=10);
 }
 
 p, table, pre {
@@ -286,25 +291,6 @@ ul, ul li {
 		top: 1px;
 		box-shadow: none;
 	}
-
-
-#\.skeleton\.version {
-	margin: 0em;
-	padding: 1ex 1em;
-	text-align: right;
-	position: absolute;
-	top: 0px;
-	right: 0px;
-}
-
-	#\.skeleton\.version a {
-		color: #666;
-		text-decoration: none;
-	}
-		#\.skeleton\.version a:hover,
-		#\.skeleton\.version a:focus {
-			text-decoration: underline;
-		}
 
 .mfp-arrow {
 	opacity: 0.15;

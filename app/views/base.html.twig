@@ -22,12 +22,11 @@
 	{% endif %}
 	{% if breadcrumbs %}
 	<nav>
-		<div>
-			{% for item in breadcrumbs %}
-			<a href="{{ item.url }}">{{ item.label }}</a>
-			<span>❭</span>
-			{% endfor %}
-		</div>
+		<ul>
+		{% for item in breadcrumbs %}
+			<li><a href="{{ item.url }}">{{ item.label }}</a></li>
+		{% endfor %}
+		</ul>
 	</nav>
 	{% endif %}
 {% endblock %}
