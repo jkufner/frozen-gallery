@@ -13,9 +13,9 @@
 	<tbody>
 	{% for item in list %}
 		<tr>
-			<td class="date" nowrap>{% if item.date %}<time>{{ item.date | date(gallery.date_format) }}</time>{% endif %}</td>
+			<td class="date" nowrap>{% if item.date %}<time>{{ item.date | date(date_format) }}</time>{% endif %}</td>
 			<td class="title"><a href="{{ item.url }}">{{ item.title }}</a></td>
-			<td class="mtime" nowrap><time>{{ item.mtime | date(gallery.datetime_format) }}</time></td>
+			<td class="mtime" nowrap><time>{{ item.mtime | date(datetime_format) }}</time></td>
 		</tr>
 	{% endfor %}
 	</tbody>

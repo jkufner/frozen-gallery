@@ -3,16 +3,16 @@
 <head>
 	<meta charset="UTF-8">
 	<title>{{title}}</title>
-	<link  href="/app/js/lib/magnific-popup.css" rel="stylesheet" type="text/css">
-	<link  href="/app/js/lib/leaflet/leaflet.css" rel="stylesheet" type="text/css">
-	<link  href="/app/js/lib/leaflet.fullscreen/dist/leaflet.fullscreen.css" rel="stylesheet" type="text/css">
-	<link  href="/app/style/style.css" rel="stylesheet" type="text/css">
-	<script src="/app/js/lib/jquery-3.2.0.min.js" type="text/javascript"></script>
-	<script src="/app/js/lib/jquery.magnific-popup.min.js" type="text/javascript"></script>
-	<script src="/app/js/lib/leaflet/leaflet.js" type="text/javascript"></script>
-	<script src="/app/js/lib/leaflet.coloricon.js" type="text/javascript"></script>
-	<script src="/app/js/lib/leaflet.fullscreen/dist/Leaflet.fullscreen.min.js" type="text/javascript"></script>
-	<script src="/app/js/main.js" type="text/javascript"></script>
+	<link  href="/js/lib/magnific-popup.css" rel="stylesheet" type="text/css">
+	<link  href="/js/lib/leaflet/leaflet.css" rel="stylesheet" type="text/css">
+	<link  href="/js/lib/leaflet.fullscreen/dist/leaflet.fullscreen.css" rel="stylesheet" type="text/css">
+	<link  href="/style/style.css" rel="stylesheet" type="text/css">
+	<script src="/js/lib/jquery-3.2.0.min.js" type="text/javascript"></script>
+	<script src="/js/lib/jquery.magnific-popup.min.js" type="text/javascript"></script>
+	<script src="/js/lib/leaflet/leaflet.js" type="text/javascript"></script>
+	<script src="/js/lib/leaflet.coloricon.js" type="text/javascript"></script>
+	<script src="/js/lib/leaflet.fullscreen/dist/Leaflet.fullscreen.min.js" type="text/javascript"></script>
+	<script src="/js/main.js" type="text/javascript"></script>
 </head>
 <body>
 <header>
@@ -21,8 +21,8 @@
 		<a href="/">{{title}}</a>
 	</h1>
 	{% if date is defined %}
-		<time class="title" datetime="{{ date | date(gallery.date_format) }}">
-		{{date|date(gallery.date_format)}}
+		<time class="title" datetime="{{ date | date(date_format) }}">
+		{{date|date(date_format)}}
 	</time>
 	{% endif %}
 	{% if breadcrumbs %}

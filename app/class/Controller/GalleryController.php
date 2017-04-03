@@ -42,13 +42,13 @@ class GalleryController extends Controller
 	 */
 	public function indexAction()
 	{
-		$gallery_config = $this->getParameter('gallery');
-
-		$list = static::buildGalleryListing($gallery_config, '/');
+		$list = $this->buildGalleryListing('/');
 
 		return $this->render('index.html.twig', [
-			'title' => $gallery_config['name'],
-			'breadcrumbs' => $this->buildBreadcrumbs($gallery_config, null, '/'),
+			'title' => $this->getParameter('gallery.name'),
+			'breadcrumbs' => $this->buildBreadcrumbs(null, '/'),
+			'date_format' => $this->getParameter('gallery.date_format'),
+			'datetime_format' => $this->getParameter('gallery.datetime_format'),
 			'list' => $list,
 		]);
 	}
@@ -56,9 +56,7 @@ class GalleryController extends Controller
 
 	public function galleryAction($gallery, $path = "/")
 	{
-		$gallery_config = $this->getParameter('gallery');
-
-		$path_prefix = $gallery_config['path_prefix'];
+		$path_prefix = $this->getParameter('gallery.path_prefix');
 
 		$list = array();
 		$others = array();
@@ -70,30 +68,32 @@ class GalleryController extends Controller
 		if ($gallery_info === false) {
 			throw $this->createNotFoundException('Gallery not found.');
 		} else if (is_dir($filename)) {
-			return $this->handleDirectory($gallery_config, $gallery_info, $path, $filename);
+			return $this->handleDirectory($gallery_info, $path, $filename);
 		} else {
 			$exiftool_json = '/_exiftool.json';
-			if (substr_compare($path, $gallery_config['url_thumbnail_ext'], - strlen($gallery_config['url_thumbnail_ext'])) === 0) {
-				$src_filename = substr($filename, 0, - strlen($gallery_config['url_thumbnail_ext']));
+			$url_thumbnail_ext = $this->getParameter('gallery.url_thumbnail_ext');
+			if (substr_compare($path, $url_thumbnail_ext, - strlen($url_thumbnail_ext)) === 0) {
+				$src_filename = substr($filename, 0, - strlen($url_thumbnail_ext));
 				if (is_file($src_filename)) {
-					return $this->handleThumbnail($gallery_config, $gallery_info, $path, $filename, $src_filename);
+					return $this->handleThumbnail($gallery_info, $path, $filename, $src_filename);
 				} else {
-					return $this->handleFile($gallery_config, $gallery_info, $path, $filename);
+					return $this->handleFile($gallery_info, $path, $filename);
 				}
 			} else {
-				return $this->handleFile($gallery_config, $gallery_info, $path, $filename);
+				return $this->handleFile($gallery_info, $path, $filename);
 			}
 		}
 
 	}
 
 
-	protected function buildBreadcrumbs($gallery_config, $gallery_info, $path)
+	protected function buildBreadcrumbs($gallery_info, $path)
 	{
 		$path_parts = $path == '/' ? array() : explode('/', trim($path, '/'));
 		$breadcrumbs = array();
 
-		$prefix = $gallery_info ? $gallery_config['url_prefix'].'/'.$gallery_info['filename'].'/' : $gallery_config['url_prefix'].'/';
+		$url_prefix = $this->getParameter('gallery.url_prefix');
+		$prefix = $gallery_info ? $url_prefix.'/'.$gallery_info['filename'].'/' : $url_prefix.'/';
 
 		for ($i = count($path_parts); $i > 0; $i--) {
 			$breadcrumbs[] = array(
@@ -110,20 +110,22 @@ class GalleryController extends Controller
 			];
 		}
 
+		$root_breadcrumb = $this->getParameter('gallery.root_breadcrumb');
+
 		$breadcrumbs[] = [
-			'label' => $gallery_config['root_breadcrumb'],
-			'url' => $gallery_config['url_prefix'],
+			'label' => $root_breadcrumb === "" ? $this->getParameter('gallery.name') : $root_breadcrumb,
+			'url' => $url_prefix,
 		];
 
 		return array_reverse($breadcrumbs);
 	}
 
 
-	protected function buildGalleryListing($gallery_config, $path)
+	protected function buildGalleryListing($path)
 	{
-		$path_prefix = rtrim($gallery_config['path_prefix'], '/').$path;
-		$url_prefix  = rtrim($gallery_config['url_prefix'], '/').$path;
-		$index_file  = $gallery_config['index_file'];
+		$path_prefix = rtrim($this->getParameter('gallery.path_prefix'), '/').$path;
+		$url_prefix  = rtrim($this->getParameter('gallery.url_prefix'), '/').$path;
+		$index_file  = $this->getParameter('gallery.index_file');
 		$list = array();
 
 		if ($index_file) {
@@ -164,11 +166,11 @@ class GalleryController extends Controller
 	}
 
 
-	protected function handleDirectory($gallery_config, $gallery_info, $path, $filename)
+	protected function handleDirectory($gallery_info, $path, $filename)
 	{
-		$path_prefix = $gallery_config['path_prefix'].'/';
-		$url_prefix  = $gallery_config['url_prefix'].$gallery_info['filename'].'/';
-		$url_thumbnail_ext = $gallery_config['url_thumbnail_ext'];
+		$path_prefix = $this->getParameter('gallery.path_prefix').'/';
+		$url_prefix  = $this->getParameter('gallery.url_prefix').$gallery_info['filename'].'/';
+		$url_thumbnail_ext = $this->getParameter('gallery.url_thumbnail_ext');
 
 		$d = opendir($filename);
 		$list = [];
@@ -194,8 +196,9 @@ class GalleryController extends Controller
 				}
 
 				if ($img && isset($img['width']) && isset($img['height'])) {
+					$tb_size = $this->getParameter('gallery.thumbnail_size');
 					list($tb_width, $tb_height) = Thumbnail::calculateThumbnailSize($img['width'], $img['height'], $img['orientation'],
-						$gallery_config['resize_mode'], $gallery_config['thumbnail_size'], $gallery_config['thumbnail_size']);
+							$this->getParameter('gallery.resize_mode'), $tb_size, $tb_size);
 
 					// Store image
 					$img['filename'] = $file;
@@ -223,24 +226,25 @@ class GalleryController extends Controller
 		uksort($list, 'strcoll');
 		uksort($others, 'strcoll');
 
-		$dav_url = $gallery_config['dav_url_prefix']
-			.str_replace('%2F', '/', rawurlencode($gallery_info['filename'].($path == '/' ? '/' : '/'.$path.'/')));
+		$dav_url_prefix = $this->getParameter('gallery.dav_url_prefix');
+		$dav_url = $dav_url_prefix ? $dav_url_prefix.str_replace('%2F', '/', rawurlencode($gallery_info['filename'].($path == '/' ? '/' : '/'.$path.'/'))) : null;
 
 		return $this->render('gallery.html.twig', [
 			'title' => $gallery_info['title'],
 			'date' => $gallery_info['date'] ? $gallery_info['date'] : null,
-			'breadcrumbs' => $this->buildBreadcrumbs($gallery_config, $gallery_info, $path),
+			'breadcrumbs' => $this->buildBreadcrumbs($gallery_info, $path),
 			'show_map' => $show_map,
 			'info' => $gallery_info,
 			'list' => $list,
 			'others' => $others,
-			'dav_url' => empty($gallery_config['dav_url_prefix']) ? null : $dav_url,
-			'exiftool_json' => ($path == '/' ? $url_prefix : $url_prefix.$path.'/').'_exiftool.json',
+			'dav_url' => $dav_url,
+			'date_format' => $this->getParameter('gallery.date_format'),
+			'datetime_format' => $this->getParameter('gallery.datetime_format'),
 		]);
 	}
 
 
-	protected function handleFile($gallery_config, $gallery_info, $path, $filename)
+	protected function handleFile($gallery_info, $path, $filename)
 	{
                 if (file_exists($filename)) {
 			return new BinaryFileResponse($filename);
@@ -250,22 +254,23 @@ class GalleryController extends Controller
 	}
 
 
-	protected function handleThumbnail($gallery_config, $gallery_info, $path, $filename, $src_filename, $size = -1)
+	protected function handleThumbnail($gallery_info, $path, $filename, $src_filename, $size = -1)
 	{
-		$path_prefix = $gallery_config['path_prefix'];
-		$url_prefix  = $gallery_config['url_prefix'];
-		$url_thumbnail_ext = $gallery_config['url_thumbnail_ext'];
+		$path_prefix = $this->getParameter('gallery.path_prefix');
+		$url_prefix  = $this->getParameter('gallery.url_prefix');
+		$url_thumbnail_ext = $this->getParameter('gallery.url_thumbnail_ext');
+		$resize_mode = $this->getParameter('gallery.resize_mode');
 
 		if ($size <= 0) {
-			$size = $gallery_config['thumbnail_size'];
+			$size = $this->getParameter('gallery.thumbnail_size');
 		}
 
                 // prepare cache file
-                $cache_dir = 'var/cache';
+                $cache_dir = $this->getParameter('gallery.thumbnail_cache_path');
                 if (!is_dir($cache_dir)) {
                         mkdir($cache_dir);
                 }
-                $cache_fn = md5($src_filename.'|'.$size.'|'.$gallery_config['resize_mode']);
+                $cache_fn = md5($src_filename.'|'.$size.'|'.$resize_mode);
                 $cache_file = $cache_dir.'/'.substr($cache_fn, 0, 2);
                 if (!is_dir($cache_file)) {
                         mkdir($cache_file);
@@ -274,7 +279,7 @@ class GalleryController extends Controller
 
                 // update cache if required
 		if (!is_readable($cache_file) || filemtime($src_filename) > filemtime($cache_file) /* || filemtime(__FILE__) > filemtime($cache_file) */) {
-                        Thumbnail::generateThumbnail($cache_file, $src_filename, $size, $size, $gallery_config['resize_mode']);
+                        Thumbnail::generateThumbnail($cache_file, $src_filename, $size, $size, $resize_mode);
                 }
                 if ($cache_file !== false) {
                         //$this->out('thumbnail_file', $cache_file);
@@ -285,7 +290,7 @@ class GalleryController extends Controller
 	}
 
 
-	public function handleExiftool($gallery_config, $gallery_info, $path, $filename)
+	public function handleExiftool($gallery_info, $path, $filename)
 	{
 		// passthru('cd '.escapeshellarg(dirname($filename)).'; exiftool -j -SourceFile -GPSLatitude -GPSLongitude .');
 		passthru('cd '.escapeshellarg(dirname($filename)).'; exiftool -j -SourceFile -GPSLatitude -GPSLongitude .');

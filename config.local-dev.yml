@@ -1,3 +1,4 @@
 # local configuration
 parameters:
+        gallery.name: "gallery.delfinek.loc"
 

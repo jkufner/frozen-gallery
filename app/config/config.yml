@@ -5,18 +5,18 @@
 #
 
 parameters:
-        gallery:
-                name: "%kernel.hostname%"
-                root_breadcrumb: "%kernel.hostname%"
-                path_prefix: "%kernel.root_dir%/data/gallery/"
-                url_prefix: "/"
-                dav_url_prefix: "webdavs://gallery.frozen-doe.net/dav/"
-                index_file: "data/gallery/index.list"
-                url_thumbnail_ext: ".tb.jpg"
-                resize_mode: "same_height"
-                thumbnail_size: 160
-                date_format: "Y-m-d"
-                datetime_format: "Y-m-d H:i:s"
+        gallery.name: "%kernel.hostname%"
+        gallery.root_breadcrumb: ""
+        gallery.path_prefix: "%kernel.root_dir%/data/gallery/"
+        gallery.url_prefix: "/"
+        gallery.dav_url_prefix: "webdavs://gallery.frozen-doe.net/dav/"
+        gallery.index_file: "%kernel.root_dir%/data/gallery/index.list"
+        gallery.url_thumbnail_ext: ".tb.jpg"
+        gallery.resize_mode: "same_height"
+        gallery.thumbnail_size: 160
+        gallery.thumbnail_cache_path: "%kernel.root_dir%/var/cache/"
+        gallery.date_format: "Y-m-d"
+        gallery.datetime_format: "Y-m-d H:i:s"
 
 framework:
         assets: false
@@ -34,8 +34,7 @@ twig:
         strict_variables: "%kernel.debug%"
         paths:
                 - "%kernel.root_dir%/app/views"
-        globals:
-                gallery: "%gallery%"
+        globals: []
 
 services:
 
