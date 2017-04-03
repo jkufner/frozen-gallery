@@ -37,4 +37,9 @@ twig:
         globals: []
 
 services:
+        bytes_twig_extension:
+                class: Gallery\Twig\BytesExtension
+                public: false
+                tags:
+                        - { name: twig.extension }
 

@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>{{title}}</title>
+	<title>{{ title }}</title>
 	<link  href="/js/lib/magnific-popup.css" rel="stylesheet" type="text/css">
 	<link  href="/js/lib/leaflet/leaflet.css" rel="stylesheet" type="text/css">
 	<link  href="/js/lib/leaflet.fullscreen/dist/leaflet.fullscreen.css" rel="stylesheet" type="text/css">
@@ -18,11 +18,11 @@
 <header>
 {% block header %}
 	<h1>
-		<a href="/">{{title}}</a>
+		<a href="/">{{ title }}</a>
 	</h1>
 	{% if date is defined %}
 		<time class="title" datetime="{{ date | date(date_format) }}">
-		{{date|date(date_format)}}
+		{{ date|date(date_format) }}
 	</time>
 	{% endif %}
 	{% if breadcrumbs %}
