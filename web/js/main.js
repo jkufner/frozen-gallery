@@ -101,7 +101,7 @@ $(document).ready(function()
 		var gallery_selector = '.gallery_listing a.item img';
 		var gallery_image_count = $(gallery_selector).length;
 		var progress_bar = null;
-		var refresh_interval = 0.4; // seconds
+		var refresh_interval = 0.35; // seconds
 
 		if (gallery_image_count == 0) {
 			// Nothing to load
@@ -115,8 +115,12 @@ $(document).ready(function()
 					'top': '100%',
 					'left': 0,
 					'width': 0,
-					'height': '0.4em',
+					'height': 0,
 					'background': '#888',
+					'color': '#888',
+					'white-space': 'nowrap',
+					'text-align': 'left',
+					'padding-top': '0.5em',
 					'opacity': 1,
 					'transition': 'width ' + refresh_interval + 's linear,'
 						+ ' opacity ' + 1.5 * refresh_interval + 's ease-out',
@@ -125,6 +129,7 @@ $(document).ready(function()
 			}
 			if (gallery_image_count > 0) {
 				progress_bar.css('width', total > 0 ? 100. * (part / total) + '%' : 0);
+				progress_bar.text(" Loading: " + part + ' / ' + total);
 			}
 		}
 
