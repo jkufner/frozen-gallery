@@ -72,15 +72,20 @@ header nav {
 		margin: 0em;
 		padding: 0em;
 		display: inline-block;
+		display: inline-flex;
+		flex-flow: column nowrap;
+		justify-content: center;
+		align-content: stretch;
+		align-items: stretch;
 	}
 
 	header nav ul li a {
-		height: 100%;
 		display: block;
 		position: relative;
 		left: -2.5em;
 		padding: 0.5em 1em 0.5em 2.5em;
 		margin: 0em;
+		flex: 1 1;
 	}
 
 	header nav ul li a:hover,
@@ -254,7 +259,8 @@ ul, ul li {
 			margin: 0px;
 		}
 
-		.gallery_listing .item .photo {
+		.gallery_listing .item .photo,
+		.gallery_map {
 			position: relative;
 			border: 1px solid #000;
 			/* min-height: 160px; */
@@ -297,6 +303,66 @@ ul, ul li {
 		top: 1px;
 		box-shadow: none;
 	}
+
+.gallery_map {
+	height: 45vh;
+	max-width: 65em;
+	margin: 2em auto;
+	position: relative;
+	overflow: hidden;
+}
+
+	.leaflet-pseudo-fullscreen {
+		z-index: 90000;
+	}
+
+	.mfp-bg {
+		z-index: 91000;
+	}
+
+	.mfp-wrap {
+		z-index: 91500;
+	}
+
+	.gallery_map .gallery_map_canvas {
+		width: 100%;
+		height: 100%;
+	}
+
+	.leaflet-control-attribution {
+		max-width: 20em;
+		max-height: 1.5em;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
+		text-align: left;
+		opacity: 0.4;
+
+		a {
+			color: inherit;
+			border: none;
+			text-decoration: none;
+		}
+	}
+
+	.leaflet-control-attribution:hover {
+		white-space: normal;
+		max-width: 70vh;
+		max-height: 30vh;
+		opacity: 1;
+	}
+
+	.leaflet-marker-icon.map_thumbnail_marker {
+	}
+
+		.leaflet-marker-icon.map_thumbnail_marker div {
+			width: 44px;
+			height: 44px;
+			border: 2px solid #fff;
+			box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+			background: #ccc no-repeat center center;
+			background-size: cover;
+		}
 
 .mfp-arrow {
 	opacity: 0.15;

@@ -12,10 +12,16 @@
 {% endfor%}
 </ul>
 
+{% if show_map %}
+<div class="gallery_map">
+	<div class="gallery_map_canvas" id="gallery_map"></div>
+</div>
+{% endif %}
+
 {% endif %}
 <div class="gallery_listing">
 {% for item in list %}
-	<a class="item" href="{{ item.url }}">
+	<a class="item" href="{{item.url}}" data-lat="{{item.location.lat}}" data-lng="{{item.location.lng}}">
 		<span class="photo">
 			<img src="{{ item.tb_url }}" alt="[thumbnail]"
 				{%- if item.tb_width is defined %} width="{{ item.tb_width | round }}"{% endif -%}

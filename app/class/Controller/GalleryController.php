@@ -26,6 +26,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\ProcessBuilder;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 
 
 /**
@@ -69,6 +72,7 @@ class GalleryController extends Controller
 		} else if (is_dir($filename)) {
 			return $this->handleDirectory($gallery_config, $gallery_info, $path, $filename);
 		} else {
+			$exiftool_json = '/_exiftool.json';
 			if (substr_compare($path, $gallery_config['url_thumbnail_ext'], - strlen($gallery_config['url_thumbnail_ext'])) === 0) {
 				$src_filename = substr($filename, 0, - strlen($gallery_config['url_thumbnail_ext']));
 				if (is_file($src_filename)) {
@@ -170,50 +174,41 @@ class GalleryController extends Controller
 		$list = [];
 		$others = [];
 
+		$exif_data = $this->loadExiftoolJson($filename);
+		//var_dump($exif_data);
+
+		$show_map = false;
+
 		while (($file = readdir($d)) !== false) {
 			if ($file[0] != '.') {
 				$full_name = $filename.'/'.$file;
-				if (preg_match('/(\.jpe?g|\.png|\.gif|\.tiff)$/i', $file)) {
-					// get metadata
-					$exif = @ exif_read_data($full_name, 0, TRUE);
-					if ($exif) {
-						$location = Gallery::exifToLocation($exif);
-						if (isset($exif['COMPUTED']['Width']) && isset($exif['COMPUTED']['Height'])) {
-							$width = $exif['COMPUTED']['Width'];
-							$height = $exif['COMPUTED']['Height'];
-						} else {
-							@ list($width, $height) = getimagesize($full_name);
-						}
-						$orientation = isset($exif['IFD0']['Orientation']) ? $exif['IFD0']['Orientation'] : 0;
-					} else {
-						$location = null;
-						@ list($width, $height) = getimagesize($full_name);
-						$orientation = 0;
-					}
-				} else {
-					$width = $height = false;
-				}
-
 				$path_url = $path == '/' ? $url_prefix : $url_prefix.$path.'/';
 				$file_url = $path_url.$file;
 
-				if ($width && $height) {
-					list($tb_width, $tb_height) = Thumbnail::calculateThumbnailSize($width, $height, $orientation,
+				if (!preg_match('/(\.jpe?g|\.png|\.gif|\.tiff)$/i', $file)) {
+					$img = null;
+				} else if (isset($exif_data[$file])) {
+					$img = $exif_data[$file];
+				} else {
+					$img = $this->readImageMetadata($full_name);
+				}
+
+				if ($img && isset($img['width']) && isset($img['height'])) {
+					list($tb_width, $tb_height) = Thumbnail::calculateThumbnailSize($img['width'], $img['height'], $img['orientation'],
 						$gallery_config['resize_mode'], $gallery_config['thumbnail_size'], $gallery_config['thumbnail_size']);
 
-					// store item
-					$list[$file] = array(
-						'filename' => $file,
-						'path' => $full_name,
-						'url' => $file_url,
-						'tb_url' => $file_url.$url_thumbnail_ext,
-						'location' => $location,
-						'width' => $width,
-						'height' => $height,
-						'tb_width' => $tb_width,
-						'tb_height' => $tb_height,
-					);
+					// Store image
+					$img['filename'] = $file;
+					$img['full_name'] = $full_name;
+					$img['url'] = $file_url;
+					$img['tb_url'] = $file_url.$url_thumbnail_ext;
+					$img['tb_width'] = $tb_width;
+					$img['tb_height'] = $tb_height;
+					$list[$file] = $img;
+
+					$show_map |= isset($img['location']['lat']) && isset($img['location']['lng']);
 				} else {
+					// Store generic file
 					$others[$file] = array(
 						'title' => $file,
 						'link' => $file_url,
@@ -235,10 +230,12 @@ class GalleryController extends Controller
 			'title' => $gallery_info['title'],
 			'date' => $gallery_info['date'] ? $gallery_info['date'] : null,
 			'breadcrumbs' => $this->buildBreadcrumbs($gallery_config, $gallery_info, $path),
+			'show_map' => $show_map,
 			'info' => $gallery_info,
 			'list' => $list,
 			'others' => $others,
 			'dav_url' => empty($gallery_config['dav_url_prefix']) ? null : $dav_url,
+			'exiftool_json' => ($path == '/' ? $url_prefix : $url_prefix.$path.'/').'_exiftool.json',
 		]);
 	}
 
@@ -285,6 +282,77 @@ class GalleryController extends Controller
 		} else {
 			throw $this->createNotFoundException('Thumbnail not found.');
 		}
+	}
+
+
+	public function handleExiftool($gallery_config, $gallery_info, $path, $filename)
+	{
+		// passthru('cd '.escapeshellarg(dirname($filename)).'; exiftool -j -SourceFile -GPSLatitude -GPSLongitude .');
+		passthru('cd '.escapeshellarg(dirname($filename)).'; exiftool -j -SourceFile -GPSLatitude -GPSLongitude .');
+		die();
+	}
+
+
+	/**
+	 * Run `exiftool -j -SourceFile -GPSLatitude -GPSLongitude .`
+	 * on gallery directory to obtain EXIF metadata.
+	 */
+	protected function loadExiftoolJson($path = '.')
+	{
+		try {
+			$pb = new ProcessBuilder(['exiftool', '-n', '-json', '-ImageWidth', '-ImageHeight', '-Orientation',
+				'-SourceFile', '-GPSLatitude', '-GPSLongitude', $path]);
+			$p = $pb->getProcess();
+			//var_dump($p->getCommandLine());
+			$p->run();
+
+			$file_data = [];
+			foreach (json_decode($p->getOutput(), TRUE) as $f) {
+				$fn = basename($f['SourceFile']);
+				$file_data[$fn] = [
+					'width' => isset($f['ImageWidth']) ? (int) $f['ImageWidth'] : null,
+					'height' => isset($f['ImageHeight']) ? (int) $f['ImageHeight'] : null,
+					'orientation' => isset($f['Orientation']) ? (int) $f['Orientation'] : null,
+					'location' => [
+						'lat' => isset($f['GPSLatitude'])  ? (float) $f['GPSLatitude'] : null,
+						'lng' => isset($f['GPSLongitude']) ? (float) $f['GPSLongitude'] : null,
+						'alt' => isset($f['GPSAltitude'])  ? (float) $f['GPSAltitude'] : null,
+					],
+				];
+			}
+		}
+		catch (ProcessFailedException $ex) {
+			throw $ex;
+		}
+
+		return $file_data;
+	}
+
+	protected function readImageMetadata($filename)
+	{
+		// get metadata
+		$exif = @ exif_read_data($full_name, 0, TRUE);
+		if ($exif) {
+			$location = Gallery::exifToLocation($exif);
+			if (isset($exif['COMPUTED']['Width']) && isset($exif['COMPUTED']['Height'])) {
+				$width = $exif['COMPUTED']['Width'];
+				$height = $exif['COMPUTED']['Height'];
+			} else {
+				@ list($width, $height) = getimagesize($full_name);
+			}
+			$orientation = isset($exif['IFD0']['Orientation']) ? $exif['IFD0']['Orientation'] : 0;
+		} else {
+			$location = null;
+			$size = getimagesize($full_name);
+			$orientation = 0;
+		}
+
+		return [
+			'width' => $size[0],
+			'height' => $size[1],
+			'orientation' => $orientation,
+			'location' => $location,
+		];
 	}
 
 }

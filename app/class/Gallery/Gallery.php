@@ -62,12 +62,15 @@ class Gallery
 			} else {
 				$alt = null;
 			}
+
+			return array(
+				'lat' => $lat,
+				'lng' => $lon,
+				'alt' => $alt,
+			);
 		} else {
-			$lon = null;
-			$lat = null;
-			$alt = null;
+			return null;
 		}
-		return array($lon, $lat, $alt);
 	}
 
 
