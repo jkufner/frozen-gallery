@@ -27,9 +27,9 @@ class Thumbnail
 			= self::calculateTransformParameters($w_orig, $h_orig, $ort, $resize_mode, $w_dst, $h_dst);
 
 		if ($needs_rotation == 90 || $needs_rotation == 270) {
-			return array($h_dst, $w_dst);
+			return array((int) $h_dst, (int) $w_dst);
 		} else {
-			return array($w_dst, $h_dst);
+			return array((int) $w_dst, (int) $h_dst);
 		}
 	}
 

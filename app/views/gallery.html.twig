@@ -4,9 +4,9 @@
 
 {% if others %}
 <ul class="gallery_listing">
-{% for item in  others %}
+{% for item in others %}
 	<li>
-		<a href="{{item.link}}">{{item.title}}</a>
+		<a href="{{url_prefix}}{{item.filename}}">{{item.filename}}</a>
 		{%- if item.size != null %} <small>({{ item.size }})</small>{% endif %}
 	</li>
 {% endfor%}
@@ -20,14 +20,14 @@
 
 {% endif %}
 <div class="gallery_listing">
-{% for item in list %}
-	<a class="item" href="{{item.url}}" data-lat="{{item.location.lat}}" data-lng="{{item.location.lng}}">
+{% for item in images %}
+	<a class="item" href="{{url_prefix}}{{item.filename}}" data-lat="{{item.location.lat}}" data-lng="{{item.location.lng}}">
 		<span class="photo">
-			<img src="{{ item.tb_url }}" alt="[thumbnail]"
+			<img src="{{url_prefix}}{{item.filename}}{{tb_suffix}}" alt="[thumbnail]"
 				{%- if item.tb_width is defined %} width="{{ item.tb_width | round }}"{% endif -%}
 				{%- if item.tb_height is defined %} height="{{ item.tb_height | round }}"{% endif -%}>
 		</span>
-		<span class="name">{{ item.filename }}</span>
+		<span class="name">{{item.filename}}</span>
 	</a>
 {% endfor %}
 </div>

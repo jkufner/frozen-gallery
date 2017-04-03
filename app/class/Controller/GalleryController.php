@@ -168,64 +168,18 @@ class GalleryController extends Controller
 
 	protected function handleDirectory($gallery_info, $path, $filename)
 	{
-		$path_prefix = $this->getParameter('gallery.path_prefix').'/';
-		$url_prefix  = $this->getParameter('gallery.url_prefix').$gallery_info['filename'].'/';
-		$url_thumbnail_ext = $this->getParameter('gallery.url_thumbnail_ext');
+		// Load directory content
+		list($images, $others, $have_geo_data) = $this->loadDirectory($filename);
 
-		$d = opendir($filename);
-		$list = [];
-		$others = [];
-
-		$exif_data = $this->loadExiftoolJson($filename);
-		//var_dump($exif_data);
-
-		$show_map = false;
-
-		while (($file = readdir($d)) !== false) {
-			if ($file[0] != '.') {
-				$full_name = $filename.'/'.$file;
-				$path_url = $path == '/' ? $url_prefix : $url_prefix.$path.'/';
-				$file_url = $path_url.$file;
-
-				if (!preg_match('/(\.jpe?g|\.png|\.gif|\.tiff)$/i', $file)) {
-					$img = null;
-				} else if (isset($exif_data[$file])) {
-					$img = $exif_data[$file];
-				} else {
-					$img = $this->readImageMetadata($full_name);
-				}
-
-				if ($img && isset($img['width']) && isset($img['height'])) {
-					$tb_size = $this->getParameter('gallery.thumbnail_size');
-					list($tb_width, $tb_height) = Thumbnail::calculateThumbnailSize($img['width'], $img['height'], $img['orientation'],
-							$this->getParameter('gallery.resize_mode'), $tb_size, $tb_size);
-
-					// Store image
-					$img['filename'] = $file;
-					$img['full_name'] = $full_name;
-					$img['url'] = $file_url;
-					$img['tb_url'] = $file_url.$url_thumbnail_ext;
-					$img['tb_width'] = $tb_width;
-					$img['tb_height'] = $tb_height;
-					$list[$file] = $img;
-
-					$show_map |= isset($img['location']['lat']) && isset($img['location']['lng']);
-				} else {
-					// Store generic file
-					$others[$file] = array(
-						'title' => $file,
-						'link' => $file_url,
-						'size' => is_file($full_name) ? filesize($full_name) : null,
-					);
-				}
-			}
+		// Calculate size of each thumbnail
+		$tb_size = $this->getParameter('gallery.thumbnail_size');
+		$tb_resize_mode = $this->getParameter('gallery.resize_mode');
+		foreach ($images as $f => $img) {
+			list($images[$f]['tb_width'], $images[$f]['tb_height']) = Thumbnail::calculateThumbnailSize($img['width'], $img['height'],
+				$img['orientation'], $tb_resize_mode, $tb_size, $tb_size); 
 		}
 
-		closedir($d);
-
-		uksort($list, 'strcoll');
-		uksort($others, 'strcoll');
-
+		// Calculate WebDAV URL
 		$dav_url_prefix = $this->getParameter('gallery.dav_url_prefix');
 		$dav_url = $dav_url_prefix ? $dav_url_prefix.str_replace('%2F', '/', rawurlencode($gallery_info['filename'].($path == '/' ? '/' : '/'.$path.'/'))) : null;
 
@@ -233,10 +187,11 @@ class GalleryController extends Controller
 			'title' => $gallery_info['title'],
 			'date' => $gallery_info['date'] ? $gallery_info['date'] : null,
 			'breadcrumbs' => $this->buildBreadcrumbs($gallery_info, $path),
-			'show_map' => $show_map,
-			'info' => $gallery_info,
-			'list' => $list,
+			'url_prefix' => $this->getParameter('gallery.url_prefix').$gallery_info['filename'].($path == '/' ? '/' : '/'.$path.'/'),
+			'tb_suffix' => $this->getParameter('gallery.url_thumbnail_ext'),
+			'images' => $images,
 			'others' => $others,
+			'show_map' => $have_geo_data,
 			'dav_url' => $dav_url,
 			'date_format' => $this->getParameter('gallery.date_format'),
 			'datetime_format' => $this->getParameter('gallery.datetime_format'),
@@ -256,9 +211,6 @@ class GalleryController extends Controller
 
 	protected function handleThumbnail($gallery_info, $path, $filename, $src_filename, $size = -1)
 	{
-		$path_prefix = $this->getParameter('gallery.path_prefix');
-		$url_prefix  = $this->getParameter('gallery.url_prefix');
-		$url_thumbnail_ext = $this->getParameter('gallery.url_thumbnail_ext');
 		$resize_mode = $this->getParameter('gallery.resize_mode');
 
 		if ($size <= 0) {
@@ -290,11 +242,57 @@ class GalleryController extends Controller
 	}
 
 
-	public function handleExiftool($gallery_info, $path, $filename)
+	protected function loadDirectory($dirname)
 	{
-		// passthru('cd '.escapeshellarg(dirname($filename)).'; exiftool -j -SourceFile -GPSLatitude -GPSLongitude .');
-		passthru('cd '.escapeshellarg(dirname($filename)).'; exiftool -j -SourceFile -GPSLatitude -GPSLongitude .');
-		die();
+		// Result storage
+		$list = [];
+		$others = [];
+		$have_geo_data = false;
+
+		// Load EXIF for all files in the directory
+		$exif_data = $this->loadExiftoolJson($dirname);
+
+		// Load directory
+		$d = opendir($dirname);
+		while (($filename = readdir($d)) !== false) {
+			if ($filename[0] == '.') {
+				continue;
+			}
+
+			$full_filename = $dirname.'/'.$filename;
+
+			if (!preg_match('/(\.jpe?g|\.png|\.gif|\.tiff)$/i', $filename)) {
+				$img = null;
+			} else if (isset($exif_data[$filename])) {
+				$img = $exif_data[$filename];
+			} else {
+				$img = $this->readImageMetadata($full_filename);
+			}
+
+			if ($img && isset($img['width']) && isset($img['height'])) {
+				// Store image
+				$img['filename'] = $filename;
+				$img['size'] = filesize($full_filename);
+				$list[$filename] = $img;
+
+				// Got geo data?
+				$have_geo_data |= isset($img['location']['lat']) && isset($img['location']['lng']);
+			} else {
+				// Store generic file
+				$others[$filename] = array(
+					'filename' => $filename,
+					'size' => is_file($full_filename) ? filesize($full_filename) : null,
+				);
+			}
+		}
+
+		closedir($d);
+
+		// Sort result
+		uksort($list, 'strcoll');
+		uksort($others, 'strcoll');
+
+		return [ $list, $others, $have_geo_data ];
 	}
 
 

@@ -11,6 +11,7 @@
     ],
     "require": {
         "symfony/framework-bundle": "^3.2",
+        "symfony/cache": "^3.2",
         "symfony/process": "^3.2",
         "symfony/templating": "^3.2",
         "symfony/translation": "^3.2",
