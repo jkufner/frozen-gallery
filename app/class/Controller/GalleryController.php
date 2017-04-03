@@ -249,16 +249,42 @@ class GalleryController extends Controller
 		$others = [];
 		$have_geo_data = false;
 
-		// Load EXIF for all files in the directory
-		$exif_data = $this->loadExiftoolJson($dirname);
-
 		// Load directory
+		$files = [];
+		$latest_mtime = max(filemtime($dirname), filemtime(__FILE__));
 		$d = opendir($dirname);
 		while (($filename = readdir($d)) !== false) {
 			if ($filename[0] == '.') {
 				continue;
 			}
 
+			$files[] = $filename;
+
+			// Get latest mtime
+			$fn = $dirname.'/'.$filename;
+			$mtime = filemtime($fn);
+			if ($mtime > $latest_mtime) {
+				$latest_mtime = $mtime;
+			}
+		}
+		closedir($d);
+
+		// Check cache
+		$cache = $this->get('cache.app');
+		$cache_key = md5('gallery:'.$dirname);
+		$cache_item = $cache->getItem($cache_key);
+		if ($cache_item->isHit()) {
+			list($cache_mtime, $cache_data) = $cache_item->get();
+			if ($cache_mtime >= $latest_mtime) {
+				return $cache_data;
+			}
+		}
+
+		// Load EXIF for all files in the directory
+		$exif_data = $this->loadExiftoolJson($dirname);
+
+		// Build result sets
+		foreach ($files as $filename) {
 			$full_filename = $dirname.'/'.$filename;
 
 			if (!preg_match('/(\.jpe?g|\.png|\.gif|\.tiff)$/i', $filename)) {
@@ -286,13 +312,17 @@ class GalleryController extends Controller
 			}
 		}
 
-		closedir($d);
-
 		// Sort result
 		uksort($list, 'strcoll');
 		uksort($others, 'strcoll');
 
-		return [ $list, $others, $have_geo_data ];
+		$result = [ $list, $others, $have_geo_data ];
+
+		// Update cache
+		$cache_item->set([$latest_mtime, $result]);
+		$cache->save($cache_item);
+
+		return $result;
 	}
 
 

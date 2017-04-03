@@ -14,12 +14,14 @@ parameters:
         gallery.url_thumbnail_ext: ".tb.jpg"
         gallery.resize_mode: "same_height"
         gallery.thumbnail_size: 160
-        gallery.thumbnail_cache_path: "%kernel.root_dir%/var/cache/"
+        gallery.thumbnail_cache_path: "%kernel.root_dir%/var/cache/thumbnails/"
         gallery.date_format: "Y-m-d"
         gallery.datetime_format: "Y-m-d H:i:s"
 
 framework:
         assets: false
+        cache:
+                app: cache.adapter.filesystem
         php_errors:
                 log: true
         router:
