@@ -39,10 +39,9 @@ rsync -a -v --stats -h \
 	--exclude='var' \
 	'./app' \
 	'./vendor' \
+	'./web' \
 	'./composer.json' \
 	'./composer.lock' \
-	'./favicon.ico' \
-	'./index.php' \
 	"$1/" \
 	--delete-after \
 #
