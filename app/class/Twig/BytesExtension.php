@@ -30,6 +30,9 @@ class BytesExtension extends \Twig_Extension
 
 	public function bytesFilter($bytes)
 	{
+		if (!is_numeric($bytes)) {
+			return $bytes;
+		}
 		$units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
 		$exp = max(0, min(floor(($bytes ? log($bytes) : 0) / log(1024)), count($units) - 1)); 
 		$n = $bytes / pow(1024, $exp);

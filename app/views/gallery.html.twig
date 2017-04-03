@@ -7,7 +7,7 @@
 {% for item in others %}
 	<li>
 		<a href="{{ url_prefix }}{{ item.filename }}">{{ item.filename }}</a>
-		<small>({{ item.size | bytes }})</small>
+		{%- if item.size != null %} <small>({{ item.size | bytes }})</small>{% endif %}
 	</li>
 {% endfor%}
 </ul>
