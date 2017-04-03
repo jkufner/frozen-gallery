@@ -312,7 +312,11 @@ class GalleryController extends Controller
 			$p->run();
 
 			$file_data = [];
-			foreach (json_decode($p->getOutput(), TRUE) as $f) {
+			$exiftool_json = json_decode($p->getOutput(), TRUE);
+			if (!is_array($exiftool_json)) {
+				return [];
+			}
+			foreach ($exiftool_json as $f) {
 				$fn = basename($f['SourceFile']);
 				$file_data[$fn] = [
 					'width' => isset($f['ImageWidth']) ? (int) $f['ImageWidth'] : null,
