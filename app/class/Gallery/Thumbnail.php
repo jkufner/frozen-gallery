@@ -226,8 +226,11 @@ class Thumbnail
 			$image_p = imagerotate($image_p, $needs_rotation, 0);
 		}
 
+		// Use progressive JPEG
+		imageinterlace($image_p, true);
+
 		// Result
-		return imagejpeg($image_p, $target_file, 92);
+		return imagejpeg($image_p, $target_file, 87);
 	}
 
 };

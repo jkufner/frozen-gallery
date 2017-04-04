@@ -63,7 +63,7 @@ class GalleryController extends Controller
 
 		$gallery_info = Gallery::getGalleryInfo($path_prefix.str_replace('/', '_', $gallery));
 
-                $filename = rtrim($gallery_info['path'], '/').'/'.rtrim($path, '/');
+		$filename = rtrim($gallery_info['path'], '/').'/'.rtrim($path, '/');
 
 		if ($gallery_info === false) {
 			throw $this->createNotFoundException('Gallery not found.');
@@ -211,7 +211,7 @@ class GalleryController extends Controller
 
 	protected function handleFile($gallery_info, $path, $filename)
 	{
-                if (file_exists($filename)) {
+		if (file_exists($filename)) {
 			return new BinaryFileResponse($filename);
 		} else {
 			throw $this->createNotFoundException('File not found: '.$filename);
@@ -227,28 +227,28 @@ class GalleryController extends Controller
 			$size = $this->getParameter('gallery.thumbnail_size');
 		}
 
-                // prepare cache file
-                $cache_dir = $this->getParameter('gallery.thumbnail_cache_path');
-                if (!is_dir($cache_dir)) {
-                        mkdir($cache_dir);
-                }
-                $cache_fn = md5($src_filename.'|'.$size.'|'.$resize_mode);
-                $cache_file = $cache_dir.'/'.substr($cache_fn, 0, 2);
-                if (!is_dir($cache_file)) {
-                        mkdir($cache_file);
-                }
-                $cache_file .= '/'.$cache_fn;
+		// prepare cache file
+		$cache_dir = $this->getParameter('gallery.thumbnail_cache_path');
+		if (!is_dir($cache_dir)) {
+			mkdir($cache_dir);
+		}
+		$cache_fn = md5($src_filename.'|'.$size.'|'.$resize_mode);
+		$cache_file = $cache_dir.'/'.substr($cache_fn, 0, 2);
+		if (!is_dir($cache_file)) {
+			mkdir($cache_file);
+		}
+		$cache_file .= '/'.$cache_fn;
 
 		// Use original, if it is small enough
-		if ($orig_max_size_bytes > 0 && filesize($src_filename) <= $orig_max_size_bytes) {
+		if ($orig_max_size_bytes > 0 && (preg_match('/\.gif$/i', $src_filename) || filesize($src_filename) <= $orig_max_size_bytes)) {
 			return new BinaryFileResponse($src_filename);
 		}
 
-                // update cache if required
+		// update cache if required
 		if (!is_readable($cache_file) || filemtime($src_filename) > filemtime($cache_file) /* || filemtime(__FILE__) > filemtime($cache_file) */) {
-                        Thumbnail::generateThumbnail($cache_file, $src_filename, $size, $size, $resize_mode);
-                }
-                if ($cache_file !== false) {
+			Thumbnail::generateThumbnail($cache_file, $src_filename, $size, $size, $resize_mode);
+		}
+		if ($cache_file !== false) {
 			return new BinaryFileResponse($cache_file);
 		} else {
 			throw $this->createNotFoundException('Thumbnail not found.');
