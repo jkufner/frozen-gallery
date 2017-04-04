@@ -56,36 +56,45 @@ header nav {
 		text-align: left;
 		flex-flow: row nowrap;
 		justify-content: center;
-		overflow: hidden;
 	}
 
 	header nav ul {
+		display: block;
 		display: flex;
+		flex-flow: row nowrap;
 		list-style: none;
 		margin: 0em auto;
-		padding: 0em 3em 0em 0em;
+		padding: 0em 3em 0em 0.5em;
 		flex-basis: 65em;
 	}
 
 	header nav ul li {
 		list-style: none;
-		margin: 0em;
-		padding: 0em;
+		margin: 0em 0em 0em -2.5em;
+		padding: 0em 0em 0em 2.5em;
+		overflow: hidden;
+		text-overflow: ellipsis;
 		display: inline-block;
 		display: inline-flex;
-		flex-flow: column nowrap;
-		justify-content: center;
+		flex-flow: row nowrap;
+		justify-content: stretch;
 		align-content: stretch;
 		align-items: stretch;
 	}
 
 	header nav ul li a {
 		display: block;
+		display: flex;
+		flex-flow: column nowrap;
 		position: relative;
 		left: -2.5em;
 		padding: 0.5em 1em 0.5em 2.5em;
 		margin: 0em;
-		flex: 1 1;
+		flex: 1 0;
+	}
+
+	header nav ul li a span {
+		margin: auto 0em;
 	}
 
 	header nav ul li a:hover,
