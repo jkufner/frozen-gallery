@@ -32,6 +32,14 @@ function initializeMap(elementId)
 		pseudoFullscreen: true	// Gallery won't open over real fullscreen
 	}));
 
+	map.on('fullscreenchange', function () {
+		if (map.isFullscreen()) {
+			map.zoomIn(1, { animate: false });
+		} else {
+			map.zoomOut(1, { animate: false });
+		}
+	});
+
 	var track_layer = L.layerGroup().addTo(map);
 
 	var thumbnail_pane = map.createPane('thumbnail');
