@@ -219,7 +219,7 @@ class GalleryController extends Controller
 	}
 
 
-	protected function handleThumbnail($gallery_info, $path, $filename, $src_filename, $size = -1)
+	protected function handleThumbnail($gallery_info, $path, $filename, $src_filename, $size = -1, $orig_max_size_bytes = -1)
 	{
 		$resize_mode = $this->getParameter('gallery.resize_mode');
 
@@ -239,6 +239,11 @@ class GalleryController extends Controller
                 }
                 $cache_file .= '/'.$cache_fn;
 
+		// Use original, if it is small enough
+		if ($orig_max_size_bytes > 0 && filesize($src_filename) <= $orig_max_size_bytes) {
+			return new BinaryFileResponse($src_filename);
+		}
+
                 // update cache if required
 		if (!is_readable($cache_file) || filemtime($src_filename) > filemtime($cache_file) /* || filemtime(__FILE__) > filemtime($cache_file) */) {
                         Thumbnail::generateThumbnail($cache_file, $src_filename, $size, $size, $resize_mode);
@@ -253,7 +258,9 @@ class GalleryController extends Controller
 
 	protected function handlePreview($gallery_info, $path, $filename, $src_filename)
 	{
-		return $this->handleThumbnail($gallery_info, $path, $filename, $src_filename, $this->getParameter('gallery.preview_size'));
+		return $this->handleThumbnail($gallery_info, $path, $filename, $src_filename,
+			$this->getParameter('gallery.preview_size'),
+			$this->getParameter('gallery.preview_min_bytes'));
 	}
 
 

@@ -25,7 +25,8 @@ parameters:
 
         # Photo preview
         gallery.url_preview_ext: ".preview.jpg"
-        gallery.preview_size: 1080
+        gallery.preview_size: 1080                # Height of the preview in px (depends on resize_mode)
+        gallery.preview_min_bytes: 1048576        # Original must be at least X bytes to use the preview (default 1MB)
 
         assets_url: "/assets"
 
