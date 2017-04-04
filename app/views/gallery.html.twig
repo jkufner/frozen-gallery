@@ -6,7 +6,7 @@
 <ul class="gallery_listing">
 {% for item in others %}
 	<li>
-		<a href="{{ url_prefix }}{{ item.filename }}">{{ item.filename }}</a>
+		<a class="file_link" href="{{ url_prefix }}{{ item.filename }}">{{ item.filename }}</a>
 		{%- if item.size != null %} <small>({{ item.size | bytes }})</small>{% endif %}
 	</li>
 {% endfor%}
@@ -21,7 +21,7 @@
 {% endif %}
 <div class="gallery_listing">
 {% for item in images %}
-	<a class="item" href="{{ url_prefix }}{{ item.filename }}" data-lat="{{ item.location.lat }}" data-lng="{{ item.location.lng }}">
+	<a class="thumbnail" href="{{ url_prefix }}{{ item.filename }}" data-lat="{{ item.location.lat }}" data-lng="{{ item.location.lng }}">
 		<span class="photo">
 			<img src="{{ url_prefix }}{{ item.filename }}{{ tb_suffix }}" alt="[thumbnail]"
 				{%- if item.tb_width is defined %} width="{{ item.tb_width | round }}"{% endif -%}

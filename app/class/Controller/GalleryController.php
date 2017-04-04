@@ -309,6 +309,8 @@ class GalleryController extends Controller
 					'filename' => $filename,
 					'size' => is_file($full_filename) ? filesize($full_filename) : null,
 				);
+
+				$have_geo_data |= preg_match('/\.gpx$/i', $filename);
 			}
 		}
 

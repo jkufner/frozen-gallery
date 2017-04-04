@@ -32,12 +32,22 @@ function initializeMap(elementId)
 		pseudoFullscreen: true	// Gallery won't open over real fullscreen
 	}));
 
+	var track_layer = L.layerGroup().addTo(map);
+	var thumbnail_layer = L.layerGroup().addTo(map);
+
 	//console.info('Loading exiftool.json:', exiftool_json_url);
 	//console.log('img_base = ', img_base);
 
 	var bb = L.latLngBounds();
-			
-	$('.gallery_listing a.item').each(function(i, el) {
+	function fitMapView() {
+		if (bb.isValid()) {
+			map.fitBounds(bb, { animate: false, maxZoom: 13 });
+			console.log('Map view: %s, zoom %d.', map.getCenter().toString(), map.getZoom());
+		}
+	}
+
+	// Add images to the map
+	$('.gallery_listing a.thumbnail').each(function(i, el) {
 		var $el = $(el);
 		var lat = $el.data('lat');
 		var lng = $el.data('lng');
@@ -58,27 +68,52 @@ function initializeMap(elementId)
 						className: 'map_thumbnail_marker',
 					})
 				})
-				.on('click', function() {
+				.on('click', function(ev) {
+					console.log('Click:', $el, ev);
 					$el.click();
 				})
-				.addTo(map);
+				.addTo(thumbnail_layer);
 			bb.extend(ll);
 		}
 	});
 
-	if (bb.isValid()) {
-		map.fitBounds(bb, { animate: false, maxZoom: 13 });
-		console.log('Map view: %s, zoom %d.', map.getCenter().toString(), map.getZoom());
-	} else {
-		map.destroy();
-	}
+	fitMapView();
+
+	// Add GPX files to the map
+	$('.gallery_listing a.file_link').each(function(i, el) {
+		var $el = $(el);
+		var gpx_url = $el.attr('href');
+		if (gpx_url.match(/\.gpx$/)) {
+			var gpx = new L.GPX(gpx_url, {
+					marker_options: {
+						startIcon: L.colorIcon({ color: '#af4' }),
+						endIcon: L.colorIcon({ color: '#fa4' }),
+						wptIcons: {
+							'': L.colorIcon({ color: '#6af' }),
+							'Geocache': L.colorIcon({ color: '#6b0' }),
+							'Parking Area': L.colorIcon({ color: '#ccc' }),
+							'Reference Point': L.colorIcon({ color: '#ddd' }),
+							'Trailhead': L.colorIcon({ color: '#bdb' }),
+						}
+					},
+					Icon: L.colorIcon({ color: '#dfd' }),
+					polyline_options: { color: '#d0a' },
+					async: true,
+				})
+				.on('loaded', function(ev) {
+					bb.extend(ev.target.getBounds());
+					fitMapView();
+				})
+				.addTo(track_layer);
+		}
+	});
 }
 
 
 $(document).ready(function() 
 {
 	// Initialize gallery
-	$('.gallery_listing a.item').magnificPopup({
+	$('.gallery_listing a.thumbnail').magnificPopup({
 		type:'image',
 		gallery: {
 			enabled: true,
@@ -98,7 +133,7 @@ $(document).ready(function()
 
 	// Progress bar
 	(function() {
-		var gallery_selector = '.gallery_listing a.item img';
+		var gallery_selector = '.gallery_listing a.thumbnail img';
 		var gallery_image_count = $(gallery_selector).length;
 		var progress_bar = null;
 		var refresh_interval = 0.35; // seconds

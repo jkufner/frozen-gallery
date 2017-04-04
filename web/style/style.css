@@ -243,22 +243,22 @@ ul, ul li {
 		text-align: left;
 	}
 
-	.gallery_listing .item {
+	.gallery_listing .thumbnail {
 		display: inline-block;
 		position: relative;
 		padding: 0px 0px 1.2em 0px;
 		margin: 0em 0.3ex;
 	}
 
-		.gallery_listing .item .photo,
-		.gallery_listing .item .name {
+		.gallery_listing .thumbnail .photo,
+		.gallery_listing .thumbnail .name {
 			display: block;
 			text-align: center;
 			padding: 0px;
 			margin: 0px;
 		}
 
-		.gallery_listing .item .photo,
+		.gallery_listing .thumbnail .photo,
 		.gallery_map {
 			position: relative;
 			border: 1px solid #000;
@@ -268,12 +268,12 @@ ul, ul li {
 			box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
 		}
 
-		.gallery_listing .item .photo img {
+		.gallery_listing .thumbnail .photo img {
 			display: block;
 			margin: 0px auto;
 		}
 
-		.gallery_listing .item .name {
+		.gallery_listing .thumbnail .name {
 			font-size: 80%;
 			overflow: hidden;
 			white-space: nowrap;
@@ -288,16 +288,16 @@ ul, ul li {
 			text-overflow: ellipsis;
 		}
 
-	.gallery_listing .item:hover,
-	.gallery_listing .item:focus {
+	.gallery_listing .thumbnail:hover,
+	.gallery_listing .thumbnail:focus {
 	}
 
-		.gallery_listing .item:hover *,
-		.gallery_listing .item:focus * {
+		.gallery_listing .thumbnail:hover *,
+		.gallery_listing .thumbnail:focus * {
 			border-color: #ccf;
 		}
 
-	.gallery_listing .item:active .photo {
+	.gallery_listing .thumbnail:active .photo {
 		left: 1px;
 		top: 1px;
 		box-shadow: none;
