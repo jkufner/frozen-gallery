@@ -93,7 +93,7 @@ class GalleryController extends Controller
 		$breadcrumbs = array();
 
 		$url_prefix = $this->getParameter('gallery.url_prefix');
-		$prefix = $gallery_info ? $url_prefix.'/'.$gallery_info['filename'].'/' : $url_prefix.'/';
+		$prefix = $gallery_info ? rtrim($url_prefix, '/').'/'.$gallery_info['filename'].'/' : $url_prefix.'/';
 
 		for ($i = count($path_parts); $i > 0; $i--) {
 			$breadcrumbs[] = array(
@@ -111,11 +111,12 @@ class GalleryController extends Controller
 		}
 
 		$root_breadcrumb = $this->getParameter('gallery.root_breadcrumb');
-
-		$breadcrumbs[] = [
-			'label' => $root_breadcrumb === "" ? $this->getParameter('gallery.name') : $root_breadcrumb,
-			'url' => $url_prefix,
-		];
+		if ($root_breadcrumb !== null) {
+			$breadcrumbs[] = [
+				'label' => $root_breadcrumb === "" ? $this->getParameter('gallery.name') : $root_breadcrumb,
+				'url' => $url_prefix,
+			];
+		}
 
 		return array_reverse($breadcrumbs);
 	}
