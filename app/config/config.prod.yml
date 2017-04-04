@@ -1,5 +1,5 @@
 imports:
         - { resource: "config.yml" }
         - { resource: "../../config.local-prod.yml" }
-        - { resource: "../../var/assets.config.yml" }
+        - { resource: "../../web/assets.config.yml" }
 

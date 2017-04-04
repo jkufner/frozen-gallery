@@ -22,7 +22,7 @@ class Assets
 {
 	public static function installSymlink()
 	{
-		$config = __DIR__ . '/../../var/assets.config.yml';
+		$config = __DIR__ . '/../../web/assets.config.yml';
 		$assets_target = '../app/assets';
 		$assets_dir = __DIR__ . '/../../web/';
 		$assets_url = '/';
