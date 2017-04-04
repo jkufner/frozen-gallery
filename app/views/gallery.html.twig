@@ -3,33 +3,44 @@
 {% block main %}
 
 {% if others %}
-<ul class="gallery_listing">
-{% for item in others %}
-	<li>
-		<a class="file_link" href="{{ url_prefix }}{{ item.filename }}">{{ item.filename }}</a>
-		{%- if item.size != null %} <small>({{ item.size | bytes }})</small>{% endif %}
-	</li>
-{% endfor%}
-</ul>
+	<ul class="gallery_listing">
+	{% for item in others %}
+		<li>
+			<a class="file_link" href="{{ url_prefix }}{{ item.filename }}">{{ item.filename }}</a>
+			{%- if item.size != null %} <small>({{ item.size | bytes }})</small>{% endif %}
+		</li>
+	{% endfor%}
+	</ul>
+{% endif %}
 
 {% if show_map %}
-<div class="gallery_map">
-	<div class="gallery_map_canvas" id="gallery_map"></div>
-</div>
+	<div class="gallery_map">
+		<div class="gallery_map_canvas" id="gallery_map"></div>
+	</div>
 {% endif %}
 
+{% if images %}
+	<div class="gallery_listing">
+	{% for item in images %}
+		<a class="thumbnail" href="{{ url_prefix }}{{ item.filename }}"
+				data-preview="{{ url_prefix }}{{ item.filename }}{{ preview_suffix}}"
+				data-lat="{{ item.location.lat }}" data-lng="{{ item.location.lng }}">
+			<span class="photo">
+				<img src="{{ url_prefix }}{{ item.filename }}{{ tb_suffix }}" alt="[thumbnail]"
+					{%- if item.tb_width is defined %} width="{{ item.tb_width | round }}"{% endif -%}
+					{%- if item.tb_height is defined %} height="{{ item.tb_height | round }}"{% endif -%}>
+			</span>
+			<span class="name">{{ item.filename }} <small>({{ item.size | bytes }})</small></span>
+		</a>
+	{% endfor %}
+	</div>
+
+	<div class="tip">
+		<b>Tip:</b> Left click on a thumbnail opens a reduced-quality preview,
+		but the thumbnail links the original file — try to open it in a new
+		tab/window (ctrl+click).
+	</div>
 {% endif %}
-<div class="gallery_listing">
-{% for item in images %}
-	<a class="thumbnail" href="{{ url_prefix }}{{ item.filename }}" data-lat="{{ item.location.lat }}" data-lng="{{ item.location.lng }}">
-		<span class="photo">
-			<img src="{{ url_prefix }}{{ item.filename }}{{ tb_suffix }}" alt="[thumbnail]"
-				{%- if item.tb_width is defined %} width="{{ item.tb_width | round }}"{% endif -%}
-				{%- if item.tb_height is defined %} height="{{ item.tb_height | round }}"{% endif -%}>
-		</span>
-		<span class="name">{{ item.filename }} <small>({{ item.size | bytes }})</small></span>
-	</a>
-{% endfor %}
-</div>
+
 {% endblock %}
 

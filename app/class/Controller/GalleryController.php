@@ -70,18 +70,26 @@ class GalleryController extends Controller
 		} else if (is_dir($filename)) {
 			return $this->handleDirectory($gallery_info, $path, $filename);
 		} else {
-			$exiftool_json = '/_exiftool.json';
+			// Try thumbnail
 			$url_thumbnail_ext = $this->getParameter('gallery.url_thumbnail_ext');
 			if (substr_compare($path, $url_thumbnail_ext, - strlen($url_thumbnail_ext)) === 0) {
 				$src_filename = substr($filename, 0, - strlen($url_thumbnail_ext));
 				if (is_file($src_filename)) {
 					return $this->handleThumbnail($gallery_info, $path, $filename, $src_filename);
-				} else {
-					return $this->handleFile($gallery_info, $path, $filename);
 				}
-			} else {
-				return $this->handleFile($gallery_info, $path, $filename);
 			}
+
+			// Try preview
+			$url_preview_ext = $this->getParameter('gallery.url_preview_ext');
+			if (substr_compare($path, $url_preview_ext, - strlen($url_preview_ext)) === 0) {
+				$src_filename = substr($filename, 0, - strlen($url_preview_ext));
+				if (is_file($src_filename)) {
+					return $this->handlePreview($gallery_info, $path, $filename, $src_filename);
+				}
+			}
+
+			// Otherwise serve file
+			return $this->handleFile($gallery_info, $path, $filename);
 		}
 
 	}
@@ -190,6 +198,7 @@ class GalleryController extends Controller
 			'breadcrumbs' => $this->buildBreadcrumbs($gallery_info, $path),
 			'url_prefix' => $this->getParameter('gallery.url_prefix').$gallery_info['filename'].($path == '/' ? '/' : '/'.$path.'/'),
 			'tb_suffix' => $this->getParameter('gallery.url_thumbnail_ext'),
+			'preview_suffix' => $this->getParameter('gallery.url_preview_ext'),
 			'images' => $images,
 			'others' => $others,
 			'show_map' => $have_geo_data,
@@ -235,11 +244,16 @@ class GalleryController extends Controller
                         Thumbnail::generateThumbnail($cache_file, $src_filename, $size, $size, $resize_mode);
                 }
                 if ($cache_file !== false) {
-                        //$this->out('thumbnail_file', $cache_file);
 			return new BinaryFileResponse($cache_file);
 		} else {
 			throw $this->createNotFoundException('Thumbnail not found.');
 		}
+	}
+
+
+	protected function handlePreview($gallery_info, $path, $filename, $src_filename)
+	{
+		return $this->handleThumbnail($gallery_info, $path, $filename, $src_filename, $this->getParameter('gallery.preview_size'));
 	}
 
 

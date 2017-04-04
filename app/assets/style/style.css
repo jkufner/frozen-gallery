@@ -241,6 +241,11 @@ ul, ul li {
 	list-style: square;
 }
 
+.tip {
+	margin: 2em 1em;
+	color: #888;
+}
+
 .gallery_listing {
 	text-align: center;
 	margin: 2em 0em;

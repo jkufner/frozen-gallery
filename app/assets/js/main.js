@@ -133,7 +133,18 @@ $(document).ready(function()
 		},
 		image: {
 			titleSrc: function(item) {
-				return item.el.find('span.name').text();
+				var name = item.el.find('span.name').text();
+				var orig_src = item.el.attr('href');
+
+				return $('<span>').text(name)
+					.append(' — ')
+					.append($("<a>original</a>").attr('target', '_blank').attr('href', orig_src));
+			}
+		},
+		callbacks: {
+			elementParse: function(item) {
+				// Use data-preview in popup, but link original
+				item.src = item.el.data('preview') || item.el.attr('href');
 			}
 		}
 	});

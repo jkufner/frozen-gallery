@@ -5,19 +5,30 @@
 #
 
 parameters:
+        # Gallery settings
         gallery.name: "%kernel.hostname%"
         gallery.root_breadcrumb: ""
+        gallery.date_format: "Y-m-d"
+        gallery.datetime_format: "Y-m-d H:i:s"
+
+        # Gallery location
         gallery.path_prefix: "%kernel.root_dir%/data/gallery/"
         gallery.url_prefix: "/"
         gallery.dav_url_prefix: "webdavs://gallery.frozen-doe.net/dav/"
         gallery.index_file: "%kernel.root_dir%/data/gallery/index.list"
+
+        # Gallery thumbnails
+        gallery.thumbnail_size: 160
         gallery.url_thumbnail_ext: ".tb.jpg"
         gallery.resize_mode: "same_height"
-        gallery.thumbnail_size: 160
         gallery.thumbnail_cache_path: "%kernel.root_dir%/var/cache/thumbnails/"
-        gallery.date_format: "Y-m-d"
-        gallery.datetime_format: "Y-m-d H:i:s"
+
+        # Photo preview
+        gallery.url_preview_ext: ".preview.jpg"
+        gallery.preview_size: 1080
+
         assets_url: "/assets"
+
 
 framework:
         assets: false
