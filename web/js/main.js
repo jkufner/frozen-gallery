@@ -33,7 +33,10 @@ function initializeMap(elementId)
 	}));
 
 	var track_layer = L.layerGroup().addTo(map);
+
+	var thumbnail_pane = map.createPane('thumbnail');
 	var thumbnail_layer = L.layerGroup().addTo(map);
+	thumbnail_pane.style.zIndex = 650;
 
 	//console.info('Loading exiftool.json:', exiftool_json_url);
 	//console.log('img_base = ', img_base);
@@ -62,6 +65,7 @@ function initializeMap(elementId)
 					title: name,
 					clickable: true,
 					zIndexOffset: - i * 1000,
+					pane: 'thumbnail',
 					icon: L.divIcon({
 						iconSize: [ 44, 44 ],
 						html: '<div style="background-image: url(' + encodeURI(tb_src) + ');"></div>',
