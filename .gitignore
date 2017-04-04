@@ -3,4 +3,5 @@
 /vendor
 /config.local-dev.yml
 /config.local-prod.yml
+/web/assets.*
 

@@ -17,6 +17,7 @@ parameters:
         gallery.thumbnail_cache_path: "%kernel.root_dir%/var/cache/thumbnails/"
         gallery.date_format: "Y-m-d"
         gallery.datetime_format: "Y-m-d H:i:s"
+        assets_url: "/assets"
 
 framework:
         assets: false
@@ -36,7 +37,8 @@ twig:
         strict_variables: "%kernel.debug%"
         paths:
                 - "%kernel.root_dir%/app/views"
-        globals: []
+        globals:
+                assets_url: '%assets_url%'
 
 services:
         bytes_twig_extension:

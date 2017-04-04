@@ -25,6 +25,11 @@
         "classmap": [
             "app/AppKernel.php"
         ]
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            [ "Gallery\\Assets", "installSymlink" ]
+        ]
     }
 }
 
