@@ -98,8 +98,10 @@ function initializeMap(elementId)
 		if (gpx_url.match(/\.gpx$/)) {
 			var gpx = new L.GPX(gpx_url, {
 					marker_options: {
-						startIcon: L.colorIcon({ color: '#af4' }),
-						endIcon: L.colorIcon({ color: '#fa4' }),
+						startIcon: null, // L.colorIcon({ color: '#af4' }),
+						startIconUrl: null,
+						endIcon: null, // L.colorIcon({ color: '#fa4' }),
+						endIconUrl: null,
 						wptIcons: {
 							'': L.colorIcon({ color: '#6af' }),
 							'Geocache': L.colorIcon({ color: '#6b0' }),
