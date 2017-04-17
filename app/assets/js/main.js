@@ -76,7 +76,7 @@ function initializeMap(elementId)
 					pane: 'thumbnail',
 					icon: L.divIcon({
 						iconSize: [ 44, 44 ],
-						html: '<div style="background-image: url(' + encodeURI(tb_src) + ');"></div>',
+						html: '<div style="background-image: url(' + encodeURI(tb_src).replace('(', '%28').replace(')', '%29') + ');"></div>',
 						className: 'map_thumbnail_marker',
 					})
 				})
