@@ -1,6 +1,6 @@
 {
     "name": "frozen-doe.net/gallery",
-    "description": "Photo gallery at gallery.frozen-doe.net",
+    "description": "A simple photo gallery with a map for geo-tagged pictures and GPX tracks.",
     "type": "project",
     "license": "Apache-2.0",
     "authors": [
