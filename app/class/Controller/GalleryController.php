@@ -297,7 +297,7 @@ class GalleryController extends Controller
 		$cache_item = $cache->getItem($cache_key);
 		if ($cache_item->isHit()) {
 			list($cache_mtime, $cache_data) = $cache_item->get();
-			if ($cache_mtime >= $latest_mtime) {
+			if ($cache_mtime >= $latest_mtime && count($files) == count($cache_data)) {
 				return $cache_data;
 			}
 		}
