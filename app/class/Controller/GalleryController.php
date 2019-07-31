@@ -393,19 +393,19 @@ class GalleryController extends Controller
 	protected function readImageMetadata($filename)
 	{
 		// get metadata
-		$exif = @ exif_read_data($full_name, 0, TRUE);
+		$exif = @ exif_read_data($filename, 0, TRUE);
 		if ($exif) {
 			$location = Gallery::exifToLocation($exif);
 			if (isset($exif['COMPUTED']['Width']) && isset($exif['COMPUTED']['Height'])) {
 				$width = $exif['COMPUTED']['Width'];
 				$height = $exif['COMPUTED']['Height'];
 			} else {
-				@ list($width, $height) = getimagesize($full_name);
+				@ list($width, $height) = getimagesize($filename);
 			}
 			$orientation = isset($exif['IFD0']['Orientation']) ? $exif['IFD0']['Orientation'] : 0;
 		} else {
 			$location = null;
-			$size = getimagesize($full_name);
+			$size = getimagesize($filename);
 			$orientation = 0;
 		}
 
