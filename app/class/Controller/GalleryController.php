@@ -26,6 +26,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\ProcessBuilder;
 use Symfony\Component\Process\Exception\ProcessFailedException;
@@ -40,9 +41,9 @@ class GalleryController extends Controller
 	/**
 	 * Directory index
 	 */
-	public function indexAction()
+	public function indexAction(?string $list = null)
 	{
-		$list = $this->buildGalleryListing('/');
+		$list = $this->buildGalleryListing('/', $list);
 
 		return $this->render('index.html.twig', [
 			'title' => $this->getParameter('gallery.name'),
@@ -62,6 +63,10 @@ class GalleryController extends Controller
 		$others = array();
 
 		$gallery_info = Gallery::getGalleryInfo($path_prefix.str_replace('/', '_', $gallery));
+
+		if (!$gallery_info) {
+			throw new NotFoundHttpException('Gallery not found: ' . $gallery);
+		}
 
 		$filename = rtrim($gallery_info['path'], '/').'/'.rtrim($path, '/');
 
@@ -130,14 +135,22 @@ class GalleryController extends Controller
 	}
 
 
-	protected function buildGalleryListing($path)
+	protected function buildGalleryListing($path, ?string $list = null)
 	{
 		$path_prefix = rtrim($this->getParameter('gallery.path_prefix'), '/').$path;
 		$url_prefix  = rtrim($this->getParameter('gallery.url_prefix'), '/').$path;
-		$index_file  = $this->getParameter('gallery.index_file');
+		if ($list !== null) {
+			$index_file = dirname($this->getParameter('gallery.index_file')) . '/' . $list . '.list';
+		} else {
+			$index_file = $this->getParameter('gallery.index_file');
+		}
 		$list = array();
 
 		if ($index_file) {
+			if (!file_exists($index_file)) {
+				throw new NotFoundHttpException('Gallery listing not found.');
+			}
+
 			// Read index file and scan only named subdirectories
 			foreach (file($index_file) as $file) {
 				$file = trim($file);

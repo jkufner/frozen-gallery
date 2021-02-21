@@ -3,6 +3,13 @@ index:
         defaults:
                 _controller: "Gallery\\Controller\\GalleryController::indexAction"
 
+list:
+        path: /ls/{list}
+        defaults:
+                _controller: "Gallery\\Controller\\GalleryController::indexAction"
+        requirements:
+                list: '^[a-z0-9-]+$'
+
 gallery:
         path: /{gallery}/
         defaults:

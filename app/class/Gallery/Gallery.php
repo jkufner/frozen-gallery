@@ -55,10 +55,10 @@ class Gallery
 		if (isset($exif["GPSLongitude"]) && isset($exif['GPSLongitudeRef'])
 			&& isset($exif["GPSLatitude"]) && isset($exif['GPSLatitudeRef']))
 		{
-			$lon = $this->exifCoordToDecimal($exif["GPSLongitude"], $exif['GPSLongitudeRef']);
-			$lat = $this->exifCoordToDecimal($exif["GPSLatitude"], $exif['GPSLatitudeRef']);
+			$lon = static::exifCoordToDecimal($exif["GPSLongitude"], $exif['GPSLongitudeRef']);
+			$lat = static::exifCoordToDecimal($exif["GPSLatitude"], $exif['GPSLatitudeRef']);
 			if (isset($exif['GPSAltitude'])) {
-				$alt = $this->exifNumberToFloat($exif['GPSAltitude']);
+				$alt = static::exifNumberToFloat($exif['GPSAltitude']);
 			} else {
 				$alt = null;
 			}
@@ -79,7 +79,7 @@ class Gallery
 		$unit = 1;
 		$val = 0;
 		foreach ($coord as $c) {
-			$val += $this->exifNumberToFloat($c) / $unit;
+			$val += static::exifNumberToFloat($c) / $unit;
 			$unit *= 60;
 		}
 		return ($ref == 'W' || $ref == 'S') ? - $val : $val;
